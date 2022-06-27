@@ -1,0 +1,495 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0">
+    <title></title>
+    <link href="/statics/css/other.css" rel="stylesheet">
+    <link href="/statics/css/detail.css" rel="stylesheet">
+    <link href="//at.alicdn.com/t/font_220513_0tolm9ic87hq.css" rel="stylesheet">
+    <link href="/statics/css/style.css" rel="stylesheet">
+    <script src="/statics/js/jquery-1.11.0.js"></script>
+    <script src="/statics/js/jquery.SuperSlide.2.1.3.js"></script>        <link type="image/png" href="/statics/images/favicon.ico" rel="shortcut icon">    <meta name="sogou_site_verification" content="COL0mWPDLt"/>
+</head>
+<body>
+
+<!--顶部bar-->
+<div class="top_bar pub_head">
+
+    <div class="top_main clear">
+
+        <div class="list_nav fl">
+            <div class="logo fl">
+                <a href="https://www.17sucai.com/"><img src="https://www.17sucai.com/statics/images/fixed_logo.png" /></a>
+            </div>
+            <!--导航-->
+            <div class="nav clear">
+                <ul>
+                    <li class="pnav ">
+                        <a href="https://www.17sucai.com/category/4">网页特效</a>            <!--导航下拉-->
+                        <div class="subnav">
+                            <div class="item clear">
+                                <h3>分类</h3>
+                                <ul>
+                                    <li><a href="https://www.17sucai.com/category/32">图片代码</a></li>
+                                    <li><a href="https://www.17sucai.com/category/33">导航菜单</a></li>
+                                    <li><a href="https://www.17sucai.com/category/34">选项卡/滑动门</a></li>
+                                    <li><a href="https://www.17sucai.com/category/35">文字特效</a></li>
+                                    <li><a href="https://www.17sucai.com/category/36">表单代码</a></li>
+                                    <li><a href="https://www.17sucai.com/category/37">提示框/浮动层/弹出层</a></li>
+                                    <li><a href="https://www.17sucai.com/category/38">div css</a></li>
+                                    <li><a href="https://www.17sucai.com/category/39">其它特效</a></li>
+
+                                </ul>
+                            </div>
+                            <div class="item nav-tag clear">
+                                <h3>标签</h3>
+                                <ul>
+                                    <li><a href="https://www.17sucai.com/pins/tag/2771.html" target="_blank">三级联动</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/359.html" target="_blank">插件</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/534.html" target="_blank">图片切换</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/532.html" target="_blank">图片滚动</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/2347.html" target="_blank">图片轮播</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/539.html" target="_blank">全屏</a>                            </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--导航下拉结束-->
+                    </li>
+                    <li class="pnav red">
+                        <a href="https://www.17sucai.com/category/5">flash素材</a>            <!--导航下拉-->
+                        <div class="subnav">
+                            <div class="item clear">
+                                <h3>分类</h3>
+                                <ul>
+                                    <li><a href="https://www.17sucai.com/category/40">flash动画素材</a></li>
+                                    <li><a href="https://www.17sucai.com/category/41">flash banner/图片</a></li>
+                                    <li><a href="https://www.17sucai.com/category/42">flash导航菜单</a></li>
+                                    <li><a href="https://www.17sucai.com/category/62">flash模板素材</a></li>
+
+                                </ul>
+                            </div>
+                            <div class="item nav-tag clear">
+                                <h3>标签</h3>
+                                <ul>
+                                    <li><a href="https://www.17sucai.com/pins/tag/2751.html" target="_blank">源文件</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/531.html" target="_blank">焦点图</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/333.html" target="_blank">3d</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/760.html" target="_blank">发光</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/342.html" target="_blank">xml</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/9609.html" target="_blank">火箭</a>                            </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--导航下拉结束-->
+                    </li>
+                    <li class="pnav cyan">
+                        <a href="https://www.17sucai.com/category/31">html5 css3</a>            <!--导航下拉-->
+                        <div class="subnav">
+                            <div class="item clear">
+                                <h3>分类</h3>
+                                <ul>
+                                    <li><a href="https://www.17sucai.com/category/44">css3实例</a></li>
+                                    <li><a href="https://www.17sucai.com/category/45">html5实例</a></li>
+
+                                </ul>
+                            </div>
+                            <div class="item nav-tag clear">
+                                <h3>标签</h3>
+                                <ul>
+                                    <li><a href="https://www.17sucai.com/pins/tag/859.html" target="_blank">css3动画</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/418.html" target="_blank">html5 canvas</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/5291.html" target="_blank">html5导航菜单</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/6737.html" target="_blank">html5动画</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/8984.html" target="_blank">html5登录界面</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/5689.html" target="_blank">html5图片切换</a>                            </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--导航下拉结束-->
+                    </li>
+                    <li class="pnav ">
+                        <a href="https://www.17sucai.com/category/47">网页模板</a>            <!--导航下拉-->
+                        <div class="subnav">
+                            <div class="item clear">
+                                <h3>分类</h3>
+                                <ul>
+                                    <li><a href="https://www.17sucai.com/category/53">企业网站</a></li>
+                                    <li><a href="https://www.17sucai.com/category/54">商城网站</a></li>
+                                    <li><a href="https://www.17sucai.com/category/56">个人网站</a></li>
+                                    <li><a href="https://www.17sucai.com/category/60">专题模板</a></li>
+                                    <li><a href="https://www.17sucai.com/category/63">后台模板</a></li>
+                                    <li><a href="https://www.17sucai.com/category/65">响应式模板</a></li>
+                                    <li><a href="https://www.17sucai.com/category/66">手机网站</a></li>
+                                    <li><a href="https://www.17sucai.com/category/67">单页模板</a></li>
+
+                                </ul>
+                            </div>
+                            <div class="item nav-tag clear">
+                                <h3>标签</h3>
+                                <ul>
+                                    <li><a href="https://www.17sucai.com/pins/tag/1219.html" target="_blank">黄色</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/1146.html" target="_blank">登录界面</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/1500.html" target="_blank">html</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/2823.html" target="_blank">个人博客</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/4147.html" target="_blank">静态</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/1403.html" target="_blank">后台管理</a>                            </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--导航下拉结束-->
+                    </li>
+                    <li class="pnav red">
+                        <a href="https://www.17sucai.com/category/48">网页素材</a>            <!--导航下拉-->
+                        <div class="subnav">
+                            <div class="item clear">
+                                <h3>分类</h3>
+                                <ul>
+                                    <li><a href="https://www.17sucai.com/category/52">ui素材</a></li>
+                                    <li><a href="https://www.17sucai.com/category/57">图标素材</a></li>
+                                    <li><a href="https://www.17sucai.com/category/58">按钮素材</a></li>
+                                    <li><a href="https://www.17sucai.com/category/59">网页背景图片</a></li>
+
+                                </ul>
+                            </div>
+                            <div class="item nav-tag clear">
+                                <h3>标签</h3>
+                                <ul>
+                                    <li><a href="https://www.17sucai.com/pins/tag/930.html" target="_blank">黑色背景</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/945.html" target="_blank">桌面图标</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/559.html" target="_blank">小图标</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/6261.html" target="_blank">高清</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/562.html" target="_blank">网页背景</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/7124.html" target="_blank">手机图标</a>                            </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--导航下拉结束-->
+                    </li>
+                    <li class="pnav cyan">
+                        <a href="https://www.17sucai.com/category/88">整站源码</a>            <!--导航下拉-->
+                        <div class="subnav">
+                            <div class="item clear">
+                                <h3>分类</h3>
+                                <ul>
+                                    <li><a href="https://www.17sucai.com/category/89">织梦cms</a></li>
+
+                                </ul>
+                            </div>
+                            <div class="item nav-tag clear">
+                                <h3>标签</h3>
+                                <ul>
+                                    <li><a href="https://www.17sucai.com/pins/tag/3933.html" target="_blank">dedecms</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/7676.html" target="_blank">互联网</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/1958.html" target="_blank">餐饮</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/13327.html" target="_blank">科技</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/5019.html" target="_blank">食品</a>                            </li>
+                                    <li><a href="https://www.17sucai.com/pins/tag/7032.html" target="_blank">机械</a>                            </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--导航下拉结束-->
+                    </li>
+                    <li class="pnav more">
+                        <a href="#">···</a>
+                        <div class="subnav">
+                            <div class="item clear">
+                                <ul>
+                                    <li><a href="/category/1">代码</a></li>
+                                    <li><a href="/category/2">设计</a></li>
+                                    <li><a href="/pins/vip">VIP代码模块</a></li>
+                                    <li><a href="/pins/gold">金币素材</a></li>
+                                    <li><a href="/push-ranking.html">排行榜</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!--导航结束-->
+        </div>
+
+        <!--隐藏，滚动显示-->
+        <div class="hidden_top search clear">
+            <div class="main">
+                <!--分类结束-->
+                <form action="/search" id="search-form" class="form" method="GET">
+                    <input type="text" autocomplete="off" id="seachkeywords" value="" placeholder="共 24664 张 / 昨日更新16张" />
+                    <!--搜索按钮-->
+                    <div class="btn">
+                        <a href="javascript:;" id="searchBtn"><i class="icon iconfont">&#xe6ae;</i>&nbsp;搜索</a>
+                    </div>
+                    <!--下拉推荐-->
+                    <div id="search-hot" class="recommend">
+                        <ul>
+                            <li class="hot1"><span>1</span><em>app</em></li>
+                            <li class="hot2"><span>2</span><em>选项卡</em></li>
+                            <li class="hot3"><span>3</span><em>后台</em></li>
+                            <li><span>4</span><em>弹窗</em></li>
+                            <li><span>5</span><em>下拉菜单</em></li>
+                        </ul>
+                    </div>
+                    <div id="search-kw" class="recommend"></div>
+                </form>
+            </div>
+        </div>
+        <!--隐藏，滚动显示结束-->
+
+
+
+        <div class="loginbar fr">
+            <!--未登陆-->
+            <ul class="login_out clear" >
+                <li class="login">
+                    <a class="lg-layer" href="javascript:;">登录</a>
+                </li>
+                <li class="regist">
+                    <a class="reg-layer" href="javascript:;">注册</a>
+                </li>
+                <li class="qq">
+                    <a class="qqlogin tran" href="https://www.17sucai.com/site/auth?authclient=qq&amp;return_url=https%3A%2F%2Fwww.17sucai.com%2Fpins%2Ftag%2F5581.html"><i class="icon iconfont">&#xe68e;</i>QQ登录</a>            </li>
+                <li class="weibo">
+                    <a class="wblogin tran" href="https://www.17sucai.com/site/auth?authclient=weibo&amp;return_url=https%3A%2F%2Fwww.17sucai.com%2Fpins%2Ftag%2F5581.html"><i class="icon iconfont">&#xe6b6;</i>微博登录</a>
+                </li>
+            </ul>
+        </div>    </div>
+</div>
+<!--顶部bar结束-->
+
+
+<div class="conbox">
+    <div class="newfinno-con"></div>
+
+    <div class="tips">
+        <h2 class="b-text">矮油~~您访问的页面不在地球上...</h2>
+        <p class="m-box">
+            <span class="m-text">休息一下,去17素材逛逛看吧。</span>
+            <a class="back-index" href="http://www.17sucai.com/">返回首页</a>
+        </p>
+    </div>
+</div>
+
+
+
+
+<!--尾部-->
+<div class="footer con-foot">
+    <div class="main copyright">
+        <p>17素材网 © 2021 https://www.17sucai.com 版权所有|  <a rel="nofollow" target="_blank" href="https://beian.miit.gov.cn/">粤ICP备20006823号</a></p>
+        <ul>
+            <li>
+                <a target="_blank" href="/about.html">关于我们</a>
+            </li>
+            <li>
+                <a target="_blank" href="/pay/jf-jb">积分获取</a>
+            </li>
+            <li>
+                <a target="_blank" href="/rule.html">用户协议</a>
+            </li>
+            <li>
+                <a target="_blank" href="/pins/tagall.html">标签搜索</a>
+            </li>
+            <li>
+                <a target="_blank" href="/sitemap.html">网站地图</a>
+            </li>
+        </ul>
+        <div class="footer_logo">
+            <a href="/"><img src="/statics/images/footer_logo.png" /></a>
+        </div>
+    </div>
+</div>
+<!--页尾结束-->
+<script>
+    !(function(c,b,d,a){c[a]||(c[a]={});c[a].config=
+        {
+            pid:"e7ximn1y18@fa19e54698c5ffe",
+            appType:"web",
+            imgUrl:"https://arms-retcode.aliyuncs.com/r.png?",
+            sendResource:true,
+            enableLinkTrace:true,
+            behavior:true
+        };
+        with(b)with(body)with(insertBefore(createElement("script"),firstChild))setAttribute("crossorigin","",src=d)
+    })(window,document,"https://retcode.alicdn.com/retcode/bl.js","__bl");
+</script><!--右侧固定边栏开始-->
+<div class="right-float-bar">
+    <ul class="sb-top">
+        <li class="sv-allVip">
+            <a href="javascript:void(0);" class="lg-layer"><span class="allvip-icon-gif"></span> 开通<br>VIP</a>
+        </li>
+        <!-- 签到 -->
+        <li class="sign-in"><a href="javascript:void(0);" class="lg-layer"><i class="iconfont icon-qiandao"></i>签到</a></li>
+    </ul>
+    <ul class="sb-middle">
+        <li>
+            <a href="/qq.html" target="_blank" rel="nofollow">QQ<br>联盟</a>
+            <div class="introduce qq-group-box">
+                <a class="head clear" href="javascript:void(0);" rel="nofollow">
+                    <div class="fl title">QQ联盟</div>
+                </a>
+                <a class="qq-group-list clear" href="javascript:void(0);" rel="nofollow">
+                    <div class="fl name">17素材网VIP用户群</div><span class="fr add-group">加群</span>
+                </a>
+            </div>
+        </li>
+        <li class="match">
+            <a href="/workers.html" target="_blank" rel="nofollow"><i class="iconfont icon-02"></i>赚钱</a>
+            <div class="introduce"><i></i><span>签约前端开发工程师</span>
+                <a href="/workers.html" target="_blank" rel="nofollow">点我赚钱</a>
+            </div>
+        </li>
+    </ul>
+    <ul class="sb-bottom">
+        <li class="phone udesk-btn">
+            <a href="javascript:void(0);" rel="nofollow"><i class="iconfont icon-zixun"></i>客服</a>
+            <div class="introduce">
+                <p class="service-title">客服电话</p>
+                <div class="service-info">
+                    <p>
+                        <a class="kefu-call-btn kefu-call-border" href="https://wpa.qq.com/msgrd?v=3&uin=3264130392&site=qq&menu=yes" target="_blank" rel="nofollow"><em class="kefu-icon"></em><span class="callkf">点我联系</span></a>
+                    </p>
+                    <p>客服QQ：3264130392</p>
+                    <p class="last-child">周一至周五：9：00 - 18：00</p>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <ul class="sb-floor">
+        <li class="return-top-r return-top" style="opacity: 1; display: list-item;"><i class="iconfont icon-huidingbu"></i></li>
+    </ul>
+</div>
+<!--右侧固定边栏结束-->
+<!--登录框开始-->
+<div class="goodcover"></div>
+
+<div class="layerbox" id="loginbox">
+
+    <span class="switch-close">×</span>
+
+    <div id="otherway">
+
+        <div class="login-publicTitle">
+            <img src="/statics/images/fixed_logo.png" alt="">        </div>
+
+        <div class="login-publicTitle2">
+            <div class="linebg"></div>
+            <p>登录</p>
+        </div>
+
+        <div class="select-loginType clear">
+
+            <a class="qq left" href="https://www.17sucai.com/site/auth?authclient=qq&return_url=https%3A%2F%2Fwww.17sucai.com%2Fpins%2Ftag%2F5581.html">
+                <i class="iconfont icon-QQ"></i>
+                <span>QQ登录</span>
+                <span style="display: block;font-size: 14px;margin-top: 4px;">立即下载</span>
+            </a>
+
+            <a class="weibo left" href="https://www.17sucai.com/site/auth?authclient=weibo&return_url=https%3A%2F%2Fwww.17sucai.com%2Fpins%2Ftag%2F5581.html">
+                <i class="iconfont icon-weibo"></i>
+                <span>新浪登录</span>
+                <span style="display: block;font-size: 14px;margin-top: 4px;">立即下载</span>
+            </a>
+        </div>
+
+        <div class="login-emil clear">
+            <span class="ps-info left">ps：不建议使用邮箱账号登录，请使用qq或新浪登录。</span>
+            <a href="javascript:;" id="znlogin" class="btnemil right"><i class="iconfont icon-yonghu"></i>邮箱登录</a>
+        </div>
+
+    </div>
+
+    <div id="zhannei" style="display:none;">
+        <div class="login-publicTitle">
+            <img src="/statics/images/fixed_logo.png">
+        </div>
+        <div class="login-publicTitle2">
+            <div class="linebg"></div>
+            <p>使用邮箱登录17素材</p>
+        </div>
+        <div class="local-loginWay">
+            <form id="w0" action="https://www.17sucai.com/site/login" method="post">            <div class="form-group field-loginform-account required">
+
+                    <input type="text" id="loginform-account" class="email form-control" name="LoginForm[account]" aria-required="true">
+
+                    <div class="help-block"></div>
+                </div>            <div class="form-group field-loginform-password required">
+
+                    <input type="password" id="loginform-password" class="pwd form-control" name="LoginForm[password]" aria-required="true">
+
+                    <div class="help-block"></div>
+                </div>            <input type="submit" class="submit subtn" value="登录">            </form>        </div>
+        <span class="bkswitch"><a href="javascript:void(0);" id="threelogin"> << 返回第三方帐号登录 </a></span>
+    </div>
+
+</div>
+<!--登录框结束-->
+
+
+<!--注册框开始-->
+<div class="layerbox" id="registerbox">
+
+    <span class="switch-close">×</span>
+
+    <div class="login-publicTitle"><img src="/statics/i/logo-login.png"></div>
+
+    <div class="login-publicTitle2">
+        <div class="linebg"></div>
+        <p>注册</p>
+    </div>
+
+    <div class="select-loginType clear">
+        <a class="qq left" href="https://www.17sucai.com/site/auth?authclient=qq">
+            <i class="iconfont icon-QQ"></i>
+            <span>QQ注册</span>
+            <span style="display: block;font-size: 14px;margin-top: 4px;">立即下载</span>
+        </a>
+
+        <a class="weibo left" href="https://www.17sucai.com/site/auth?authclient=weibo">
+            <i class="iconfont icon-weibo"></i>
+            <span>新浪注册</span>
+            <span style="display: block;font-size: 14px;margin-top: 4px;">立即下载</span>
+        </a>
+    </div>
+
+</div>
+
+<!--注册框结束-->
+<!--签到-->
+<div id="sign">
+    <div class="sign-bg"></div>
+    <div class="sign-m">
+        <h2 class="title f30">签到成功!</h2>
+        <p class="sign-prompt">已连续签到<span>1</span>天，连续签到3天可获得50积分</p>
+        <a href="javascript:;" class="but">知道了</a>
+    </div>
+</div>
+<!--签到-->
+<script src="/statics/js/lazyload.js"></script>
+<script src="/statics/js/masonry.js"></script>
+<script src="/statics/js/jquery.flex-images.min.js"></script>
+<script src="/statics/js/script.js"></script>
+<script src="/assets/156256ad/yii.js"></script>
+<script src="/assets/156256ad/yii.validation.js"></script>
+<script src="/assets/156256ad/yii.activeForm.js"></script>
+<script>//百度统计
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?780bfd674747107457b04f9951920b24";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+
+</script>
+<script>jQuery(function ($) {
+        jQuery('#w0').yiiActiveForm([{"id":"loginform-account","name":"account","container":".field-loginform-account","input":"#loginform-account","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"帐号不能为空。"});yii.validation.email(value, messages, {"pattern":/^[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/,"fullPattern":/^[^@]*<[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?>$/,"allowName":false,"message":"帐号不是有效的邮箱地址。","enableIDN":false,"skipOnEmpty":1});}},{"id":"loginform-password","name":"password","container":".field-loginform-password","input":"#loginform-password","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"密码不能为空。"});}}], []);
+    });</script>
+</body>
+</html>
+
+
+
+
+
