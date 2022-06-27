@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{$model.name}产品详情-{$model.brand}</title>
+
+    <meta name="keywords" content="{$model.name}">
+    <meta name="description" content="{$model.name}">
+
+    <link rel="stylesheet" href="/sucai/iconfont.css">
+    <link rel="stylesheet" href="/sucai/animate.css">
+    <link rel="stylesheet" href="/sucai/swiper.min.css">
+
+
+    <link rel="stylesheet" href="/sucai/comment.css">
+    <link rel="stylesheet" href="/sucai/pro_details.css">
+    <link href="/sucai/jq22.css" rel="stylesheet" type="text/css">
+
+    <style>
+        .info-list{
+            display: flex;
+            flex-flow: column;
+            justify-content: space-between;
+            height: 250px;
+        }
+        .pro-cont {
+            margin-top: 10px;
+        }
+		   .wppc{
+    display: none;
+}
+@media (max-width: 767px) {
+  .wppc{
+    display: block !important;
+  }
+}
+.zhezhao{
+				position: fixed;
+				left: 0px;
+				top: 0px;
+				background: #000;
+				width: 100%;
+				height: 100%;
+				opacity: 1;
+			}
+			.tankuang{
+				position: relative;
+				background: #fff;
+				width: 30%;
+				height: 40%;
+				border-radius: 5px;
+				margin: 5% auto;
+			}
+			#header{
+	height: 40px;
+	text-align: center;
+			}
+			#header-right{
+				position: absolute;
+				width: 25px;
+				height: 25px;
+				border-radius: 5px;
+				background: red;
+				color: #fff;
+				right: 5px;
+				top: 5px;
+				text-align: center;
+			}
+
+
+    </style>
+
+    <script src="/sucai/jquery-1.12.4.min.js"></script>
+    <script src="/sucai/bootstrap.min.js"></script>
+    <script src="/sucai/swiper.min.js"></script>
+    <script type="text/javascript" src="/sucai/api">
+    </script><script type="text/javascript" src="/sucai/getscript"></script>
+    <script type="text/javascript" src="/sucai/layer.js"></script><link rel="stylesheet" href="/sucai/layer.css" id="layuicss-layer">
+</head>
+
+<body>
+    <!-- 公共头部 -->
+   
+    <!-- 移动导航-start -->
+    <div class="header-border clearfix">
+        <div class="top-shop">
+           
+
+        </div>
+
+        <!-- 头部 -->
+        <div class="new-dh clearfix">
+            <div class="content top_content clearfix">
+                <h1 class="qy_logo">
+                    <a title="传世益诚" href="http://www.shaliwang.com.cn/">
+                        <div class="qy_logo-img">
+                        </div>
+                    </a>
+                </h1>
+                <div class="qy_title">
+                    <h2 class="company-name">{$model.brand}</h2>
+                    <div class="new_t">
+                        <ul>
+                            <li>
+                                <img src="/sucai/gsrz.png" alt="工商认证图标">
+                                <p>工商认证</p>
+                            </li>
+                            <li>
+                                <img src="/sucai/wyrz.png" alt="公司认证图标">
+                                <p>公司认证</p>
+                            </li>
+                            <li>
+                                <img src="/sucai/smrz.png" alt="实名认证图标">
+                                <p>实名认证</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="phone">
+                        <img src="/sucai/dianhua.png" alt="电话">
+                        
+                                                        <p class="bdDS_tel"><a href="#" onclick="dianwo()" >联系电话</a></p>
+                                                </div>
+                    <img src="/sucai/youshi.png" class="r" alt="如实描述、品质保障、用心服务">
+                </div>
+            </div>
+        </div>
+       
+    <!-- 商品信息 -->
+    <div class="warp mt15 mob-mt">
+        <div class="main">
+            <div class="info">
+                <!-- 左侧放大镜图片 -->
+                <div class="info-left">
+                    <div>
+                        <div id="preview" class="spec-preview">
+                             <span class="jqzoom">
+                                <img jqimg="{$model.image}" src="{$model.image}" style="width: 350px;height: 350px;" alt="{$model.name}">
+                            </span>
+                        </div>
+                        <div class="spec-scroll"> <a href="JavaScript:void(0);" class="prev" title="上一个">&lt;</a> <a href="JavaScript:void(0);" class="next" title="下一个">&gt;</a>
+                            <div class="items">
+                                <ul>
+         
+                                                                            <li>
+                                            <img bimg="{$model.image}" src="{$model.image}" onmousemove="preview(this);" alt="{$model.name}">
+                                        </li>
+                                                                                            </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 移动端轮播图 -->
+                <div class="banner mob-lunbo">
+                    <div class="swiper-container swiper-container-initialized swiper-container-horizontal">
+                        <ul class="swiper-wrapper sw-banner" style="transition-duration: 300ms; transform: translate3d(-488px, 0px, 0px);"><li class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="4" style="width: 244px;">
+                                    <img src="{$model.image}" alt="{$model.name}">
+                                </li>
+                          
+                                                            <li class="swiper-slide swiper-slide-prev" data-swiper-slide-index="0" style="width: 244px;">
+                                    <img src="{$model.image}" alt="{$model.name}">
+                                </li></ul>
+                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+                   
+                </div>
+                <!-- 右侧信息 -->
+                <div class="info-middle">
+                  
+                    <div class="pro-title">
+                        <h1>{$model.name}</h1>
+                    </div>
+                    <div class="pro-price">
+                        <i>价格</i>
+                        <span>￥<span class="pro-jiage">{$model.price}</span><span class="pro-danwei"> 元</span></span>
+                    </div>
+                    <!-- 产品规格、属性 -->
+                    <div class="info-list">
+                        <dl>
+                            <dt>产品品牌：</dt>
+                            <dd>{$model.brand}</dd>
+                        </dl>
+                        <dl>
+                            <dt>供应量：</dt>
+                            <dd>1000</dd>
+                        </dl>
+                        <dl>
+                            <dt>最少起订：</dt>
+                            <dd>1</dd>
+                        </dl>
+                        <dl>
+                            <dt>发货期限：</dt>
+                            <dd>3天内发货</dd>
+                        </dl>
+                        <dl>
+                            <dt>主营产品：</dt>
+                            <dd>{$model.names}</dd>
+                        </dl>
+                        <dl>
+                            <dt>联系人：</dt>
+                            <dd>{$model.user.contact}</dd>
+                        </dl>
+                    </div>
+                    <div class="pro-cont clearfix">
+                        <ul>
+                            <li class="weixin">
+                                <a href="{$model.user.third_party_code}" target="_blank"   title="立即询价"><img src="/sucai/buy_icon_01.png">立即询价</a>
+                            </li>
+                           
+                            <li class="weixin">
+                                 <a href="#" onclick="dianwo()" title="联系我们"  ><img src="/sucai/zixun.png" alt="微信icon">联系我们</a> 
+								<!--<button type="button" onclick="dianwo()">点我</button>-->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="info-right ">
+                    <div class="others">相关产品</div>
+                    <ul>
+                         <volist name="product_list" id="item" length="3"  >
+                                                <li>
+                            <a href="/product/index?id={$item.id}" target="_blank" title="{$item.name}">
+                                <img src="{$item.image}" alt="{$item.name}">
+                                <p>{$item.name}</p>
+                            </a>
+                        </li>
+                          </volist>
+						  </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 大家都在看 -->
+	
+    <div class="warp mt15 rmtj">
+        <div class="pro-box">
+            <dt>热门推荐</dt>
+			
+           <dl>
+
+            
+               <volist name="product_list" id="item"  >
+			   <dd>
+                    <div>
+					
+                        <a target="_blank" title="{$item.name}" href="/product/index?id={$item.id}">
+                            <img src="{$item.image}" alt="{$item.name}" width="110" height="110">
+                        </a>
+                    </div>
+                    <p class="til text-overflow"><a href="/product/index?id={$item.id}" target="_blank">{$item.name}</a></p>
+					
+                </dd>
+				</volist>
+               
+                   
+                
+            </dl>
+			
+        </div>
+    </div>
+ 
+    <!-- 详细信息 -->
+    <div class="warp mt15">
+        <div class="left-sidebar">
+
+            <div class="s-shopInfo">
+                <h2>本企业其它产品</h2>
+                <dl>
+                     <volist name="product_list" id="item"  >
+                    <a target="_blank" title="{$item.name}" href="/product/index?id={$item.id}">
+                        <img src="{$item.image}" alt="{$item.name}">
+                        <b>{$item.name}</b>
+                    
+                    </a>
+                  </volist>
+               
+                    
+                </dl>
+            </div>
+        </div>
+<!-- 移动相关商品 -->
+<div class="wppc">
+           <div class="pro-box2">      
+            <dt>相关产品</dt>
+			
+           <dl>
+
+            
+               <volist name="product_list" id="item" length="3" >
+			   <dd>
+                    <div>
+					
+                        <a target="_blank" title="{$item.name}" href="/product/index?id={$item.id}">
+                            <img src="{$item.image}" alt="{$item.name}" width="110" height="110">
+                        </a>
+                    </div>
+                    <p class="til text-overflow"><a href="/product/index?id={$item.id}" target="_blank">{$item.name}</a></p>
+					
+                </dd>
+				</volist>
+               
+                   
+                
+            </dl>
+			
+        </div>
+				</div>
+<!-- 移动相关商品over -->
+        <div class="detail_box fr">
+           
+            <!-- 商品详情开始 -->
+            <div class="detial_con_box" tab-con="1" style="display: block;">
+                <div class="detail_warp">
+                    
+                    <!--清除浮动-->
+                     <div class="selltitle">
+                        <dt>产品详情</dt>
+                    </div>
+                    
+                    <div class="contents" id="content">
+                       {$model.description}
+                    </div>
+                </div>
+            </div>
+            <!-- 商品详情结束 -->
+            <script type="text/javascript" src="/sucai/pro_details.js"></script>
+            <script type="text/javascript" src="/sucai/jquery.mcustomscrollbar.min.js"></script><script src="/sucai/jquery.mousewheel.min.js"></script>
+            <script src="/sucai/jquery.mousewheel.min(1).js"></script>
+        </div>
+    </div>
+
+  
+    <!-- 底部footer -->
+    <div class="footer">
+        <div class="content">
+            <div class="bottom">
+                <ul>
+                    <li>
+                        <div class="icon s1"></div>
+                        <p class="big">正品低价</p>
+                        <span class="sim">各大厂商直接供货</span>
+                    </li>
+                    <li>
+                        <div class="icon s2"></div>
+                        <p class="big">快速物流</p>
+                        <span class="sim">多地分仓发货</span>
+                    </li>
+                    <li>
+                        <div class="icon s3"></div>
+                        <p class="big">服务门店</p>
+                        <span class="sim">上万家门店专业团队</span>
+                    </li>
+                    <li>
+                        <div class="icon s4"></div>
+                        <p class="big">贴心服务</p>
+                        <span class="sim">一站式服务售后保障</span>
+                    </li>
+                    <li>
+                        <div class="icon s5"></div>
+                        <p class="big">卓越口碑</p>
+                        <span class="sim">赢得消费者千万卓越口碑</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="copy">
+                <p class="copy_con">传世益诚 Copyright  网站备案号 京ICP备14037976号-6</p>
+            </div>
+        </div>
+    </div>
+    <!-- 右侧固定位 -->
+    <div class="suspen">
+        <ul>
+                            <!-- <a href="/index.php/user/contact/312">
+                    <li class="consult" style="display:none;">
+                        <img src="/shop/index2/img/ccwpa.png" alt="电话图标">
+                        <p>电话咨询</p>
+                        <div class="sus_phone animate__animated animate__fadeInUp animate__faster">
+                            <p class="tit">咨询电话：</p>
+                            <p class="con">
+                                联系电话
+                            </p>
+                        </div>
+                    </li>
+                </a> -->
+            
+
+            <li class="scroll" id="scroll" style="display: list-item;">
+                <img src="/sucai/backtop.png" alt="置顶按钮">
+                <p>回到顶部</p>
+            </li>
+        </ul>
+    </div>
+    <div class="gettop" id="gettop" style="display: block;">
+        <img src="/sucai/top.png" alt="top">
+    </div>
+
+    
+    <!-- 手机端底部 -->
+    <footer class="clearfix mobile-footer">
+        <div class="mobile-fL">
+            <div class="fL-more">
+                
+            </div>
+            <div class="fL-company">
+                
+            </div>
+        </div>
+        <div class="mobile-fR">
+            <div class="fR-liuyan">
+                <a  href="{$model.user.third_party_code}" target="_blank" title="在线咨询" class="message" type="button">
+                    <span>在线咨询</span>
+                </a>
+            </div>
+
+                            <div class="fR-phone">
+                    <a href="tel:{$model.user.phone}" title="一键拨号">
+                        <span>一键拨号</span>
+                    </a>
+                </div>
+                    </div>
+    </footer>
+
+
+
+
+<script type="text/javascript" src="/sucai/footer.js"></script>
+<!-- <script src="/shop/index2/js/jquery.lazyload.js"></script> -->
+<script src="/sucai/comment.js"></script>
+{$model.user.third_party_js_code}
+<script src="/sucai/zoom.js"></script>
+<script src="/sucai/jq22.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        // effect : 'flip',
+        loop: true,
+        autoplay: {
+            delay: 3000,
+            stopOnLastSlide: false,
+            disableOnInteraction: false,
+        },
+
+    });
+</script>
+<div class="zhezhao" id='zhezhao'>
+			<div class="tankuang">
+				<div id="header">
+					<span>联系我们</span>
+					<div id="header-right" onclick="hidder()">x</div>
+					</br>
+					</br>
+					<p>联系人：{$model.user.contact}  电话：{$model.user.phone}</p>
+					</br>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			document.getElementById('zhezhao').style.display="none";
+			function dianwo(){
+				document.getElementById('zhezhao').style.display="";
+			}
+			function hidder(){
+				document.getElementById('zhezhao').style.display="none";
+			}
+		</script>
+<div style="display:none;" class="jqPreload0">sdsdssdsd<img src="/sucai/ac5e2e434335ae22bb42a6d93c8cb373.jpg"></div></body></html>

@@ -1,0 +1,102 @@
+<div class='modal-header'>
+    {$edit_state? '修改关键词' : '新增关键词'}
+</div>
+<div class='modal-body '>
+    <form class='' role='form' id='form'>
+        <input type='hidden' name='id' value='{$model.id|default=""}'/>
+        <div class='row'>
+            <empty name="client_user_id">
+                <div class='col-sm-12'>
+                    <div class='form-group'>
+                        <label>客户</label>
+                        <p>
+                            <empty name="edit_state">
+                                <html:select id='user_id' name='user_id' data='user_list' class='form-control'
+                                             selected='model["user_id"]'/>
+                                <else/>
+                                <input type="hidden" name="user_id" value="{$model.user_id}">
+                                <span class="form-control">{$model.user.name}</span>
+                            </empty>
+                        </p>
+                    </div>
+                </div>
+                <else/>
+                <input type="hidden" value="{$client_user_id}" name="user_id">
+            </empty>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>域名</label>
+                    <p><input type='text' required class='form-control' id='domain' name='domain'
+                              value='{$model.domain|default=""}'
+                              autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>关键词</label>
+                    <p><input type='text' required class='form-control' id='keyword' name='keyword'
+                              value='{$model.keyword|default=""}'
+                              autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>客户单价</label>
+                    <p><input type='text' required class='form-control' id='price_client' name='price_client'
+                              value='{$model.price_client|default=""}'
+                              autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>代理单价</label>
+                    <p><input type='text' required class='form-control' id='price_agent' name='price_agent'
+                              value='{$model.price_agent|default=""}'
+                              autocomplete='off'/></p>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<div class='modal-footer'>
+    <button type='button' class='btn btn-default' data-dismiss='modal'>取消</button>
+    <button type='button' class='btn btn-primary' data-style='zoom-in' id='submit'>提交</button>
+</div>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+
+
+        function validate() {
+            return $('#form').validate({
+                rules: {
+                },
+            }).form();
+        }
+
+        $('#submit').click(function () {
+            if (validate()) {
+                var load_btn = Ladda.create(this);
+                load_btn.start();
+                var data = $('#form').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: 'save',
+                    data: data,
+                    success: function (data) {
+                        if (check_status(data)) {
+                            $('#modal-sm').modal('hide');
+                            data_table.draw();
+                        }
+                    },
+                    error: function () {
+                        toastr['error']('Error Occurred');
+                    }
+                }).always(function () {
+                    load_btn.stop();
+                });
+            }
+        });
+    });
+</script>

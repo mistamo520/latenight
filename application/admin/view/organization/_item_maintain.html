@@ -1,0 +1,287 @@
+<div class='modal-header'>
+    {$edit_state? '修改组织机构' : '新增组织机构'}
+</div>
+<div class='modal-body '>
+    <form class='' role='form' id='form' enctype="multipart/form-data">
+        <input type='hidden' name='id' value='{$model.id|default=""}'/>
+        <div class='row'>
+            <div class='col-sm-4' style="padding-right: 5px;padding-left: 5px">
+                <div class='form-group'>
+                    <label>机构名称</label>
+                    <p><input type='text' class='form-control' id='name' name='name' value='{$model.name|default=""}'
+                              autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-3'  style="padding-right: 5px;padding-left: 5px">
+                <div class='form-group'>
+                    <label>机构类型</label>
+                    <p>
+                        <html:select id='type' name='type' data='type_list' class='form-control'
+                                     selected='model["type"]'
+                                     first='请选择'/>
+                    </p>
+                </div>
+            </div>
+            <div class='col-sm-5'>
+                <div class='form-group'>
+                    <label>上级机构</label>
+                    <div class='input-group'>
+                        <input type='text' class='form-control' id='parent_name' value='{$model.parent_name|default=""}'
+                               name="parent_name" placeholder=''
+                               readonly="readonly">
+                        <input type='hidden' id='parent_id' name="parent_id" value='{$model.parent_id|default=""}'>
+                        <span class='input-group-btn'>
+                           <button type='button' id='select_parent' class='btn btn-primary'>选择</button>
+                        </span>
+                    </div>
+                    <div style="position:relative;">
+                        <div id="parent_organization_tree"
+                             style="background-color:#FFF;border: 1px solid #e5e6e7; display: none; position: absolute;top: 0;left: 0; width: 100%;z-index: 9999"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-sm-4'  style="padding-right: 5px;padding-left: 5px">
+                <div class='form-group'>
+                    <label>联系人</label>
+                    <p><input type='text' class='form-control' id='contact' name='contact'
+                              value='{$model.contact|default=""}' autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-3'  style="padding-right: 5px;padding-left: 5px">
+                <div class='form-group'>
+                    <label>联系电话</label>
+                    <p><input type='text' class='form-control' id='phone' name='phone' value='{$model.phone|default=""}'
+                              autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-5' >
+                <div class='form-group'>
+                    <label>地址</label>
+                    <div class='input-group'>
+                        <input type='hidden' class='form-control' id='longitude' name='longitude'
+                               value='{$model.longitude|default=""}' autocomplete='off'/>
+                        <input type='hidden' class='form-control' id='latitude' name='latitude'
+                               value='{$model.latitude|default=""}' autocomplete='off'/>
+                        <input type='text' class='form-control' id='address' name='address'
+                               value='{$model.address|default=""}' autocomplete='off'/>
+                        <span class='input-group-btn'>
+                           <button type='button' id='location' class='btn btn-primary'>搜索</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 m-b">
+                <div id="map" style="height: 200px;"></div>
+            </div>
+            <div class='col-sm-8'>
+                <div class='form-group'>
+                    <label>备注</label>
+                    <p>
+                        <textarea name="remark" id="" class='form-control'
+                                  rows="4">{$model.remark|default=""}</textarea>
+                    </p>
+                </div>
+            </div>
+            <div class='col-sm-4'>
+                <div class='form-group'>
+                    <label>图标<a onclick="$('#file').click()">
+                        <span>上传</span>
+                        <i class="fa fa-upload"></i>（建议尺寸40*40）
+                    </a></label>
+                    <p>
+                        <empty name="model.icon">
+                            <img id="preview" style="width: 50px;height: 50px;">
+                            <else/>
+                            <img id="preview" src="{$model.icon|default=''}" style="width: 50px;height: 50px;">
+                        </empty>
+                        <input id="file" name="file" type="file" accept="image/*"
+                               style="display: none;"
+                               onchange="document.getElementById('preview').src = window.URL.createObjectURL(document.getElementById('file').files[0])">
+                        <input type='hidden' class='form-control' name='icon'
+                               value='{$model.icon|default=""}' autocomplete='off'/>
+                    </p>
+                </div>
+            </div>
+            <if condition="$model.type eq  4">
+                <div class='col-sm-12'>
+                    <div class='form-group'>
+                        <label>站点全景图<a onclick="$('#pic_file').click()">
+                            <span>上传</span>
+                            <i class="fa fa-upload"></i>（建议尺寸800*500）
+                        </a>
+                        </label>
+                        <p>
+                            <empty name="model.picture_url">
+                                <img id="pic_preview" style="width: 100%;">
+                                <else/>
+                                <img id="pic_preview" src="{$model.picture_url|default=''}" style="width: 100%;">
+                            </empty>
+                            <input id="pic_file" name="pic_file" type="file" accept="image/*"
+                                   style="display: none;"
+                                   onchange="document.getElementById('pic_preview').src = window.URL.createObjectURL(document.getElementById('pic_file').files[0])">
+                            <input type='hidden' class='form-control' name='picture_url'
+                                   value='{$model.picture_url|default=""}' autocomplete='off'/>
+                        </p>
+                    </div>
+                </div>
+            </if>
+        </div>
+    </form>
+
+</div>
+<div class='modal-footer'>
+    <button type='button' class='btn btn-default' data-dismiss='modal'>取消</button>
+    <button type='button' class='btn btn-primary' data-style='zoom-in' id='submit'>提交</button>
+</div>
+<style>
+    .BMap_cpyCtrl, .anchorBL {
+        display: none;
+    }
+</style>
+<script type='text/javascript'>
+    $(document).ready(function () {
+        function validate() {
+            return $('#form').validate({
+                rules: {
+                    name: {
+                        required: true,
+                    },
+                    type: {
+                        required: true,
+                    }
+                },
+                errorPlacement: function (error, element) {
+                    if (element[0].id == "parent_name") {
+                        error.appendTo(element.parent().parent());
+                    } else {
+                        error.appendTo(element.parent());
+                    }
+                }
+            }).form();
+        }
+
+        $("#location").click(function () {
+            if ($("#address").val() != '') {
+                var local = new BMap.LocalSearch(map);
+                local.setSearchCompleteCallback(function (result) {
+                    var point = result.getPoi(0).point;
+                    map.setCenter(point);
+                    map.removeOverlay(marker);
+                    marker = new BMap.Marker(point);
+                    map.addOverlay(marker);
+                });
+                local.search($("#address").val());
+            }
+        });
+        $("#select_parent").click(function () {
+            if ($("#select_parent").text() == "选择") {
+                $("#select_parent").text("关闭");
+                $("#parent_organization_tree").show();
+            }
+            else {
+                $("#select_parent").text("选择");
+                $("#parent_organization_tree").hide();
+            }
+        });
+        $("#parent_organization_tree").jstree({
+            "core": {
+                'data': {
+                    'url': 'get_tree?typ=edit',
+                    'dataType': 'json',
+                }
+            },
+            "types": {
+                "default": {
+                    "icon": false  // 关闭默认图标
+                },
+            },
+            'plugins': ["types", "state"],
+        }).on("changed.jstree", function (e, data) {
+            if (data.node && data.node.original.id != 0) {
+                $("#parent_id").val(data.node.original.id);
+                $("#parent_name").val(data.node.original.text);
+                $("#select_parent").text("选择");
+                $("#parent_organization_tree").hide();
+            }
+        }).on("loaded.jstree", function (event, data) {
+            $('#parent_organization_tree').jstree().open_all();
+            data.instance.clear_state();
+        });
+
+        $('#submit').click(function () {
+            if (validate()) {
+                var load_btn = Ladda.create(this);
+                load_btn.start();
+                var data = new FormData($('#form')[0]);//$('#form').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: 'save',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        if (check_status(data)) {
+                            $('#modal-md').modal('hide');
+                            data_table.draw();
+                            $('#organization_tree').jstree().refresh();
+                            window.location.href='index';
+                        }
+                    },
+                    error: function () {
+                        toastr['error']('Error Occurred');
+                    }
+                }).always(function () {
+                    load_btn.stop();
+                });
+            }
+        });
+
+
+        center = new BMap.Point(116.404, 39.915);
+        if ($("#longitude").val() != '') {
+            center = new BMap.Point(parseFloat($("#longitude").val()), parseFloat($("#latitude").val()));
+            marker = new BMap.Marker(center);
+            map.addOverlay(marker);
+
+        }
+        setTimeout(function () {
+            map.centerAndZoom(center, 11);
+        }, 1000);
+    });
+    var marker, center;
+    var loaded = false;
+    var geoc = new BMap.Geocoder();
+    var map = new BMap.Map("map");
+    map.setDefaultCursor("crosshair");
+    map.enableScrollWheelZoom();
+    map.addControl(new BMap.NavigationControl());
+    map.addEventListener("click", function (e) {
+        map.removeOverlay(marker);
+        marker = new BMap.Marker(new BMap.Point(e.point.lng, e.point.lat));
+        map.addOverlay(marker);
+        $("#longitude").val(e.point.lng);
+        $("#latitude").val(e.point.lat);
+        geoc.getLocation(e.point, function (rs) {
+            var addComp = rs.addressComponents;
+            var address = addComp.city + addComp.district + addComp.street + addComp.streetNumber;
+            $("#address").val(address);
+        });
+    });
+
+    //
+    // function iploac(result) {//根据IP设置地图中心
+    //     var cityName = result.name;
+    // }
+    //
+    // var myCity = new BMap.LocalCity();
+    // myCity.get(iploac);
+
+    // function sear(result) {//地图搜索
+    //     var local = new BMap.LocalSearch(map, {
+    //         renderOptions: {map: map}
+    //     });
+    //     local.search(result);
+    // }
+</script>

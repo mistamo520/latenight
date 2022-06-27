@@ -1,0 +1,263 @@
+<div class="modal-header">
+    {$edit_state? '修改' : '新增'}
+</div>
+<div class="modal-body">
+    <form class="" role="form" id="form">
+        <input type="hidden" id="id" name="id" value="{$model.id|default=''}"/>
+        <div class="row">
+            <if condition="$edit_state eq false">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>客户账户</label>
+                        <p>
+                            <input type="text" class="form-control" id="user_name" name="user_name"
+                                   value="{$model.user_name|default=''}"
+                                   autocomplete="off"/>
+                        </p>
+                    </div>
+                </div>
+                <else/>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>客户账户</label>
+                        <p>
+                            <input type="text" class="form-control" id="user_name" name="user_name" readonly="readonly"
+                                   value="{$model.user_name|default=''}"
+                                   autocomplete="off"/>
+                        </p>
+                    </div>
+                </div>
+            </if>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>客户名称</label>
+                    <p>
+                        <input type="text" class="form-control" id="name" name="name"
+                               value="{$model.name|default=''}"
+                               autocomplete="off"/>
+                    </p>
+                </div>
+            </div>
+            <if condition="$edit_state eq false">
+                <div class="form-group col-sm-6">
+                    <label>登录密码</label>
+                    <p>
+                        <input type="password" class="form-control" id="password" name="password"
+                               autocomplete="off"/>
+                    </p>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label>确认密码</label>
+                    <p>
+                        <input type="password" class="form-control" id="confirmpassword" name="confirmpassword"
+                               autocomplete="off"/>
+                    </p>
+                </div>
+            </if>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>联系人</label>
+                    <p>
+                        <input type="text" class="form-control" id="contact" name="contact"
+                               value="{$model.contact|default=''}" autocomplete="off"/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>手机号</label>
+                    <p>
+                        <input type="text" class="form-control" id="phone" name="phone" maxlength="11"
+                               value="{$model.phone|default=''}" autocomplete="off"/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>版本</label>
+                    <p>
+                        <html:select id='version' name='version' data='version_list' class='form-control'
+                                     selected='model["version"]'/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>业务员</label>
+                    <p>
+                        <input type="text" class="form-control" id="salesman" name="salesman"
+                               value="{$model.salesman|default=''}" autocomplete="off"/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>计费系数/包年系数</label>
+                    <p>
+                        <input type="number" class="form-control" id="rate" name="rate"
+                               value="{$model.rate|default=''}" autocomplete="off"/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>包年基数</label>
+                    <p>
+                        <html:select id='annual_rate' name='annual_rate' data='annual_rate_list' class='form-control'
+                                     selected='model["annual_rate"]'/>
+                    </p>
+                </div>
+            </div>
+
+            <notempty name="is_admin">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>代理</label>
+                        <p>
+                            <html:select id='parent_id' name='parent_id' data='agent_list' class='form-control'
+                                         selected='model["parent_id"]' first='请选择'/>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>有效期</label>
+
+                        <div class="input-group date">
+                            <input type="text" class="form-control" id="expired_date" name="expired_date"
+                                   placeholder="" value="{$model.expired_date|default=''}">
+                            <span class="input-group-addon green-date-button-able"><i
+                                    class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>爱采购数量限制(0表示不限制)</label>
+
+                        <div>
+                            <input type="number" class="form-control" id="max_b2b_count" name="product_count_limit"
+                                   placeholder="" value="{$model.product_count_limit|default='0'}">
+                        </div>
+                    </div>
+                </div>
+            </notempty>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>第三方客服固定代码</label>
+
+                    <div>
+                        <input type="text" class="form-control" id="third_party_code" name="third_party_code"
+                               placeholder="" value="{$model.third_party_code|default=''}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>第三方客服JS代码</label>
+
+                    <div>
+                        <input type="text" class="form-control" id="third_party_js_code" name="third_party_js_code"
+                               placeholder="" value="{$model.third_party_js_code|default=''}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+    <button type="button" class="btn btn-primary" data-style="zoom-in" id="submit">提交</button>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+        $('.input-group.date').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            format: "yyyy-mm-dd",
+            language: "zh-CN",
+        });
+
+        function validate() {
+            if ($("#password").length == 0) {
+                return $("#form").validate({
+                    rules: {
+                        name: {
+                            required: true
+                        },
+                        rate: {
+                            required: true,
+                            number: true,
+                        },
+                        user_name: {
+                            required: true,
+                        },
+                        phone: {
+                            required: true,
+                            digits: true,
+                            rangelength: [11, 11]
+                        },
+                    },
+                }).form();
+            } else {
+                return $("#form").validate({
+                    rules: {
+                        name: {
+                            required: true
+                        },
+                        user_name: {
+                            required: true,
+                        },
+                        rate: {
+                            required: true,
+                            number: true,
+                        },
+                        phone: {
+                            required: true,
+                            digits: true,
+                            rangelength: [11, 11]
+                        },
+                        password: {
+                            required: true,
+                        },
+                        confirmpassword: {
+                            required: true,
+                            equalTo: "#password"
+                        },
+                    },
+                }).form();
+            }
+        }
+
+        $("#submit").click(function () {
+            if (validate()) {
+                var load_btn = Ladda.create(this);
+                load_btn.start();
+                var data = $('#form').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: "save",
+                    data: data,
+                    success: function (data) {
+                        if (check_status(data)) {
+                            $('#modal-md').modal('hide');
+                            data_table.draw();
+                        }
+                    },
+                    error: function () {
+                        toastr["error"]('Error Occurred');
+                    }
+                }).always(function () {
+                    load_btn.stop();
+                });
+            }
+        });
+    });
+</script>

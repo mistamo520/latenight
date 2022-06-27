@@ -1,0 +1,228 @@
+<div class="modal-header">
+    {$edit_state? '修改' : '新增'}
+</div>
+<div class="modal-body">
+    <form class="" enctype="multipart/form-data" role="form" id="form">
+        <input type="hidden" id="id" name="id" value="{$model.id|default=''}"/>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>用户名</label>
+                    <p>
+                        <input type="text" class="form-control" id="user_name" name="user_name"
+                               value="{$model.user_name|default=''}"
+                               autocomplete="off"/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>代理名称</label>
+                    <p>
+                        <input type="text" class="form-control" id="name" name="name"
+                               value="{$model.name|default=''}"
+                               autocomplete="off"/>
+                    </p>
+                </div>
+            </div>
+            <if condition="$edit_state eq false">
+                <div class="form-group col-sm-6">
+                    <label>登录密码</label>
+                    <p>
+                        <input type="password" class="form-control" id="password" name="password"
+                               autocomplete="off"/>
+                    </p>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label>确认密码</label>
+                    <p>
+                        <input type="password" class="form-control" id="confirmpassword" name="confirmpassword"
+                               autocomplete="off"/>
+                    </p>
+                </div>
+            </if>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>联系人</label>
+                    <p>
+                        <input type="text" class="form-control" id="contact" name="contact"
+                               value="{$model.contact|default=''}"
+                               autocomplete="off"/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>手机号</label>
+                    <p>
+                        <input type="text" class="form-control" id="phone" name="phone" maxlength="11"
+                               value="{$model.phone|default=''}" autocomplete="off"/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label>业务员</label>
+                    <p>
+                        <input type="text" class="form-control" id="salesman" name="salesman"
+                               value="{$model.salesman|default=''}"
+                               autocomplete="off"/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label>计费系数</label>
+                    <p>
+                        <input type="number" class="form-control" id="rate" name="rate"
+                               value="{$model.rate|default=''}" min="1"
+                               autocomplete="off"/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>状态</label>
+                    <p>
+                        <html:radio name="active" data='active_list' class="checkbox-initem i-checks"
+                                    checked="model['active']"/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>OEM网址(需要域名解析和反向代理)</label>
+                    <p>
+                        <input type="text" class="form-control" id="website" name="website"
+                               value="{$model.website|default=''}" autocomplete="off"/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>OEM名称</label>
+                    <p>
+                        <input type="text" class="form-control" id="oem_name" name="oem_name"
+                               value="{$model.oem_name|default=''}" autocomplete="off"/>
+                    </p>
+                </div>
+            </div><!--
+          <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>
+                        <a onclick="$('#picture').click()">公众号二维码 上传 <i class="fa fa-upload"></i>
+                        </a>
+                    </label>
+                    <p>
+                        <img id="preview" src="{$model.qr_code|default=''}" width="50%">
+                    </p>
+                    <input id="picture" name="picture" type="file" accept="image/*" style="display: none;"
+                           onchange="document.getElementById('preview').src = window.URL.createObjectURL(document.getElementById('picture').files[0])">
+                    <input type='hidden' class='form-control' name='qr_code'
+                           value='{$model.qr_code|default=""}' autocomplete='off'/>
+                </div>
+            </div>-->
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+    <button type="button" class="btn btn-primary" data-style="zoom-in" id="submit">提交</button>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+        $('.input-group.date.select').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            format: "yyyy-mm-dd",
+            language: "zh-CN",
+        });
+
+        function validate() {
+            if ($("#password").length == 0) {
+                return $("#form").validate({
+                    rules: {
+                        name: {
+                            required: true
+                        },
+                        rate: {
+                            required: true,
+                            number: true,
+                        },
+                        user_name: {
+                            required: true,
+                        },
+                        phone: {
+                            required: true,
+                            digits: true,
+                            rangelength: [11, 11]
+                        },
+                        role_id: {
+                            required: true
+                        }
+                    },
+                }).form();
+            } else {
+                return $("#form").validate({
+                    rules: {
+                        name: {
+                            required: true
+                        },
+                        rate: {
+                            required: true,
+                            number: true,
+                        },
+                        user_name: {
+                            required: true,
+                        },
+                        phone: {
+                            required: true,
+                            digits: true,
+                            rangelength: [11, 11]
+                        },
+                        password: {
+                            required: true,
+                        },
+                        confirmpassword: {
+                            required: true,
+                            equalTo: "#password"
+                        },
+                    },
+                }).form();
+            }
+        }
+
+        $("#submit").click(function () {
+            if (validate()) {
+                var load_btn = Ladda.create(this);
+                load_btn.start();
+                var data = new FormData($('#form')[0]);//$('#form').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: 'save',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        if (check_status(data)) {
+                            $('#modal-md').modal('hide');
+                            data_table.draw();
+                        }
+                    },
+                    error: function () {
+                        toastr["error"]('Error Occurred');
+                    }
+                }).always(function () {
+                    load_btn.stop();
+                });
+            }
+        });
+    });
+</script>

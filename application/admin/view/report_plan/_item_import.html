@@ -1,0 +1,105 @@
+<div class="modal-header">
+    消费报告导入
+</div>
+<div class="modal-body ">
+    <!-- form begin -->
+    <form enctype="multipart/form-data" role="form" id="form">
+
+        <div class="row">
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>1.数据下载</label>
+                    <div class="input-group date">
+                        <input type="text" class="form-control" id="start"
+                               placeholder="开始日期" value="">
+                        <span class="input-group-addon green-date-button-able"><i
+                                class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group date">
+                        <input type="text" class="form-control" id="end"
+                               placeholder="结束日期">
+                        <span class="input-group-addon green-date-button-able"><i
+                                class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p><a id="btn_export" class="btn btn-primary">下载 </a></p>
+                </div>
+                <div class="form-group">
+                    <label>2.数据上传</label>
+                    <p>
+                        <input id="import_file" name="import_file" type="file" name="excel" accept=".csv"/>
+                        <!--<button type="button" class="btn btn-primary" onclick="$('#import_file').click()" >上传</button>-->
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <label>导入消息：</label>
+                    <p class="error text-danger"></p>
+                </div>
+
+            </div>
+        </div>
+    </form>
+    <!-- form end -->
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" data-style="zoom-in" id="submit">导入</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('.input-group.date').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            format: "yyyy-mm-dd",
+            language: "zh-CN",
+        });
+        $("#btn_export").click(function () {
+            if ($('#start').val() == '' || $('#end').val() == '') {
+                toastr['error']('请选择一个日期范围');
+                return;
+            }
+            window.open('http://aladdin2.baidu.com/data/profesion/plan/report/download?startTime=' + $('#start').val().replace('-', '').replace('-', '') + moment().format('hhmmss') + '115029&endTime=' + $('#end').val().replace('-', '').replace('-', '') + +moment().format('hhmmss') + '&planType=1&aderId={$setting["baidu.aderid"]}');
+            //http://aladdin2.baidu.com/data/profesion/plan/report/download?startTime=20201028153648&endTime=20201028153648&planType=1&aderId=31438912
+            //http://aladdin2.baidu.com/data/profesion/plan/report/download?startTime=20201028033802115029&endTime=2020102833802&aderId=31438912
+            //http://aladdin2.baidu.com/data/profesion/query/report/download?startTime=20201027115029&endTime=20201027115029&aderId=31438912
+        });
+
+        $("#submit").click(function () {
+            var load_btn = Ladda.create(this);
+            load_btn.start();
+
+            var form_data = new FormData($('#form')[0]);
+            $.ajax({
+                type: 'POST',
+                url: "import_save",
+                data: form_data,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data.status == 1) {
+                        toastr["success"](data.message);
+                        $('#modal-md').modal('hide');
+                        data_table.draw();
+                    } else {
+                        $(".error")[0].innerText = data.message;
+                    }
+                },
+                error: function () {
+                    toastr["error"]('导入失败');
+                }
+            }).always(function () {
+                load_btn.stop();
+            });
+        });
+    });
+</script>

@@ -1,0 +1,91 @@
+<div class='modal-header'>
+    {$edit_state? '修改投放设置' : '新增投放设置'}
+</div>
+<div class='modal-body '>
+    <form class='' role='form' id='form'>
+        <input type='hidden' name='id' value='{$model.id|default=""}'/>
+        <div class='row'>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>用户</label>
+                    <p>
+                        <empty name="edit_state">
+                            <html:select id='user_id' name='user_id' data='user_list' class='form-control'
+                                         selected='model["user_id"]'/>
+                            <else/>
+                            <input type="hidden" name="user_id" value="{$model.user_id}">
+                            <span class="form-control">{$model.user.name}</span>
+                        </empty>
+                    </p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>推广时段</label>
+                    <p><textarea name="weekdays" id="weekdays" class="form-control" rows="5">{$model.weekdays|default=""}</textarea>
+                    </p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>推广时间</label>
+                    <p>
+                        <html:select id='hours' name='hours' data='hours_list' class='form-control'
+                                     selected='model["hours"]'/>
+                    </p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>每日预算</label>
+                    <p>
+                        <input type='text' class='form-control' id='daily_budget' name='daily_budget'
+                               value='{$model.daily_budget|default=""}' autocomplete='off'/>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class='modal-footer'>
+    <button type='button' class='btn btn-default' data-dismiss='modal'>取消</button>
+    <button type='button' class='btn btn-primary' data-style='zoom-in' id='submit'>提交</button>
+</div>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+        function validate() {
+            return $('#form').validate({
+                rules: {
+                    key: {
+                        required: true,
+                    }
+                },
+            }).form();
+        }
+
+        $('#submit').click(function () {
+            if (validate()) {
+                var load_btn = Ladda.create(this);
+                load_btn.start();
+                var data = $('#form').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: 'save',
+                    data: data,
+                    success: function (data) {
+                        if (check_status(data)) {
+                            $('#modal-sm').modal('hide');
+                            data_table.draw();
+                        }
+                    },
+                    error: function () {
+                        toastr['error']('Error Occurred');
+                    }
+                }).always(function () {
+                    load_btn.stop();
+                });
+            }
+        });
+    });
+</script>

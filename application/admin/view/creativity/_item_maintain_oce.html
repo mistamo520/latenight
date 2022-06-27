@@ -1,0 +1,136 @@
+<div class='modal-header'>
+    {$edit_state? '修改创意' : '新增创意'}
+</div>
+<div class='modal-body '>
+    <form class='' role='form' id='form' enctype="multipart/form-data">
+        <input type='hidden' name='id' value='{$model.id|default=""}'/>
+        <div class='row'>
+            <empty name="client_user_id">
+                <div class='col-sm-12'>
+                    <div class='form-group'>
+                        <label>客户</label>
+                        <p>
+                            <empty name="edit_state">
+                                <html:select id='user_id' name='user_id' data='user_list' class='form-control'
+                                             selected='model["user_id"]'/>
+                                <else/>
+                                <input type="hidden" name="user_id" value="{$model.user_id}">
+                                <span class="form-control">{$model.user.name}</span>
+                            </empty>
+                        </p>
+                    </div>
+                </div>
+                <else/>
+                <input type="hidden" value="{$client_user_id}" name="user_id">
+            </empty>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>所属{$title}</label>
+                    <p>
+                        <html:select id='unit_id' name='unit_id' data='unit_list' class='form-control'
+                                     selected='model["unit_id"]' data-key="name" data-value="id" data-parent="user_id"
+                                     first="请选择"/>
+                    </p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>标题</label>
+                    <p><input type='text' class='form-control' id='title' required name='title'
+                              value='{$model.title|default=""}'
+                              autocomplete='off' minlength="5" maxlength="30" placeholder="5-50个字符"/>
+                        <br>
+
+                    </p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>描述</label>
+                    <p><textarea name="description" id="description" maxlength="80"
+                                 placeholder="" class='form-control' rows="2">{$model.description|default=""}</textarea>
+                    </p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>
+                        组图 <span class="text-danger"></span> <a onclick="$('#picture').click()">点击上传，可以选择多个图片 <i
+                            class="fa fa-upload"></i>
+
+                    </a>
+                    </label>
+                    <p>
+                        <input id="picture" name="picture[]" type="file" accept="image/*" multiple="multiple"
+                               style="display: none"/>
+                        （建议最佳：宽高比1.52,456*300≤尺寸≤1368*900,支持JPG、PNG等图片格式内）
+                    </p>
+                    <input type='hidden' class='form-control' name='image'
+                           value='{$model.image|default=""}' autocomplete='off'/>
+
+                </div>
+            </div>
+            <volist name="image_list" id="item">
+                <div class='col-sm-6 text-center'>
+                    <img id="preview" src="{$item}" style="max-width: 250px;max-height: 250px;">
+                    <input type="text" value="{$setting['system.website_domain']}{$item}"
+                           class="form-control"/>
+                </div>
+            </volist>
+        </div>
+    </form>
+</div>
+<div class='modal-footer'>
+    <button type='button' class='btn btn-default' data-dismiss='modal'>取消</button>
+    <button type='button' class='btn btn-primary' data-style='zoom-in' id='submit'>提交</button>
+</div>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+        if ($('#user_id').length > 0) {
+            $("#user_id").change(function () {
+                $('#unit_id').val("");
+                $('#unit_id option').not(':first').addClass('hidden').filter('[data-parent^="' + $('#user_id').val() + '"]').removeClass('hidden');
+            });
+            $('#user_id').change();
+        } else {
+            $('#unit_id option').removeClass('hidden');
+        }
+
+        function validate() {
+            return $('#form').validate({
+                rules: {
+                    unit_id: {
+                        required: true,
+                    }
+                },
+            }).form();
+        }
+
+        $('#submit').click(function () {
+            if (validate()) {
+                var load_btn = Ladda.create(this);
+                load_btn.start();
+                var data = new FormData($('#form')[0]);
+                $.ajax({
+                    type: 'POST',
+                    url: 'save',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        if (check_status(data)) {
+                            $('#modal-md').modal('hide');
+                            data_table.draw();
+                        }
+                    },
+                    error: function () {
+                        toastr['error']('Error Occurred');
+                    }
+                }).always(function () {
+                    load_btn.stop();
+                });
+            }
+        });
+    });
+</script>

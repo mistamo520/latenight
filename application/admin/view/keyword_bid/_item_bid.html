@@ -1,0 +1,88 @@
+<div class='modal-header'>
+    关键词出价
+</div>
+<div class='modal-body '>
+    <form class='' role='form' id='form'>
+        <input type='hidden' name='id' value='{$model.id|default=""}'/>
+        <div class='row'>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>客户</label>
+                    <p>
+                        <span class="form-control">{$model.user.name}</span>
+                    </p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>关键词</label>
+                    <p>
+                        <span class="form-control">{$model.name}</span></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>出价</label>
+                    <p><input type='number' class='form-control' id='price' name='price'
+                              value='{$model.price|default=""}'
+                              autocomplete='off'/></p>
+                </div>
+            </div>
+            <!--<div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>出价</label>
+                    <p>
+                        <html:select id='price' name='price' data='percentage_list' class='form-control'
+                                     selected='model["price"]'/>
+                        &lt;!&ndash;                        <input type='number' class='form-control' id='price' name='price'&ndash;&gt;
+                        &lt;!&ndash;                               value='{$model.price|default=""}'&ndash;&gt;
+                        &lt;!&ndash;                               autocomplete='off'/>&ndash;&gt;
+                    </p>
+                </div>
+            </div>-->
+        </div>
+    </form>
+</div>
+<div class='modal-footer'>
+    <button type='button' class='btn btn-default' data-dismiss='modal'>取消</button>
+    <button type='button' class='btn btn-primary' data-style='zoom-in' id='submit'>提交</button>
+</div>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+        function validate() {
+            return $('#form').validate({
+                rules: {
+                    price: {
+                        required: true,
+                        number: true
+                    }
+                },
+            }).form();
+        }
+
+        $('#submit').click(function () {
+            if (validate()) {
+                var load_btn = Ladda.create(this);
+                load_btn.start();
+                var data = $('#form').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: 'bid',
+                    data: data,
+                    success: function (data) {
+                        if (check_status(data)) {
+                            $('#modal-sm').modal('hide');
+                            data_table.draw();
+                        }
+                    },
+                    error: function () {
+                        toastr['error']('Error Occurred');
+                    }
+                }).always(function () {
+                    load_btn.stop();
+                });
+            }
+        });
+    });
+</script>

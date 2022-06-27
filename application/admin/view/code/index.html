@@ -1,0 +1,111 @@
+<extend name="public/base"/>
+
+<block name="title">代码管理</block>
+<block name="content">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>代码生成</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a>首页</a>
+                </li>
+                <li>
+                    <a>代码管理</a>
+                </li>
+                <li class="active">
+                    <strong>代码生成</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>代码配置</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <form role="form" id="form">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>数据表</label>
+                                        <p><input type="text" class="form-control" name="table_name"
+                                                  autocomplete="off"/></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>窗口类型</label>
+                                        <p>
+                                            <select class="form-control" name="modal_type" id="modal_type">
+                                                <option value="sm">small</option>
+                                                <option value="md">middle</option>
+                                                <option value="lg">large</option>
+                                            </select></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>生成类型</label>
+                                        <p>
+                                            <select class="form-control" name="code_type" id="code_type">
+                                                <option value="">all</option>
+                                                <option value="api">api</option>
+                                                <option value="view">view</option>
+                                                <option value="controller">controller</option>
+                                                <option value="model">model</option>
+                                            </select></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="text-right">
+                                        <a id="submit" class="btn btn-primary">生成</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function validate() {
+                return $("#form").validate({
+                    rules: {
+                        table_name: {
+                            required: true,
+                        }
+                    },
+                }).form();
+            }
+
+            $("#submit").click(function () {
+                if (validate()) {
+                    var load_btn = Ladda.create(this);
+                    load_btn.start();
+                    var data = $('#form').serialize();
+                    $.ajax({
+                        type: 'POST',
+                        url: "generate",
+                        data: data,
+                        success: function (data) {
+                            check_status(data);
+                        },
+                        error: function () {
+                            toastr["error"]('Error Occurred');
+                        }
+                    }).always(function () {
+                        load_btn.stop();
+                    });
+                }
+            });
+        });
+    </script>
+</block>

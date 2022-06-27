@@ -1,0 +1,420 @@
+<extend name="public/base"/>
+
+<block name="title">插件设置</block>
+<block name="content">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+
+            <ol class="breadcrumb">
+                <li>
+                    <a>首页</a>
+                </li>
+                <li class="active">
+                    <strong>插件设置</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <form class="" role="form" id="form">
+        <input type="hidden" id="id" name="id" value="{$model.id|default=''}"/>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>微信直聊设置</h5>
+
+                        </div>
+                        <div class="ibox-content">
+                            <div class="form-group">
+                                <label>手机端邀请框</label>
+                                <p>
+                                    <if condition="!isset($contact_tool_setting.contact_enable_mobile)">
+                                        <html:radio name="contact_tool_setting[contact_enable_mobile]" data='enable_list'
+                                                    class="checkbox-initem i-checks"/>
+                                        <else/>
+                                        <html:radio name="contact_tool_setting[contact_enable_mobile]" data='enable_list'
+                                                    class="checkbox-initem i-checks"
+                                                    checked="contact_tool_setting['contact_enable_mobile']"/>
+                                    </if>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>电脑端邀请框</label>
+                                <p>
+                                    <if condition="!isset($contact_tool_setting.contact_enable_pc)">
+                                        <html:radio name="contact_tool_setting[contact_enable_pc]" data='enable_list'
+                                                    class="checkbox-initem i-checks"/>
+                                        <else/>
+                                        <html:radio name="contact_tool_setting[contact_enable_pc]" data='enable_list'
+                                                    class="checkbox-initem i-checks"
+                                                    checked="contact_tool_setting['contact_enable_pc']"/>
+                                    </if>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>手机端浮窗</label>
+                                <p>
+                                    <if condition="!isset($contact_tool_setting.contact_enable_mobile_float)">
+                                        <html:radio name="contact_tool_setting[contact_enable_mobile_float]" data='enable_list'
+                                                    class="checkbox-initem i-checks"/>
+                                        <else/>
+                                        <html:radio name="contact_tool_setting[contact_enable_mobile_float]" data='enable_list'
+                                                    class="checkbox-initem i-checks"
+                                                    checked="contact_tool_setting['contact_enable_mobile_float']"/>
+                                    </if>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>手机端浮窗位置</label>
+                                <p>
+                                    <empty name="contact_tool_setting.contact_float_position_mobile">
+                                        <html:radio name="contact_tool_setting[contact_float_position_mobile]"
+                                                    data='float_position_list'
+                                                    class="checkbox-initem i-checks"/>
+                                        <else/>
+                                        <html:radio name="contact_tool_setting[contact_float_position_mobile]"
+                                                    data='float_position_list'
+                                                    class="checkbox-initem i-checks"
+                                                    checked="contact_tool_setting['contact_float_position_mobile']"/>
+                                    </empty>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>电脑端浮窗</label>
+                                <p>
+                                    <if condition="!isset($contact_tool_setting.contact_enable_mobile)">
+                                        <html:radio name="contact_tool_setting[contact_enable_pc_float]" data='enable_list'
+                                                    class="checkbox-initem i-checks"/>
+                                        <else/>
+                                        <html:radio name="contact_tool_setting[contact_enable_pc_float]" data='enable_list'
+                                                    class="checkbox-initem i-checks"
+                                                    checked="contact_tool_setting['contact_enable_pc_float']"/>
+                                    </if>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>电脑端浮窗位置</label>
+                                <p>
+                                    <empty name="contact_tool_setting.contact_float_position">
+                                        <html:radio name="contact_tool_setting[contact_float_position]"
+                                                    data='float_position_list'
+                                                    class="checkbox-initem i-checks"/>
+                                        <else/>
+                                        <html:radio name="contact_tool_setting[contact_float_position]"
+                                                    data='float_position_list'
+                                                    class="checkbox-initem i-checks"
+                                                    checked="contact_tool_setting['contact_float_position']"/>
+                                    </empty>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>电脑端主动弹出聊天窗口</label>
+                                <p>
+                                    <if condition="!isset($contact_tool_setting.contact_open_message)">
+
+                                        <label class="checkbox-initem i-checks">
+                                            <input type="radio"
+                                                   name="contact_tool_setting[contact_open_message]" value="1"> 启用</label>
+                                        <label class="checkbox-initem i-checks">
+                                            <input type="radio" checked="checked"
+                                                   name="contact_tool_setting[contact_open_message]" value="0">
+                                            禁用</label>
+                                        <else/>
+                                        <html:radio name="contact_tool_setting[contact_open_message]" data='enable_list'
+                                                    class="checkbox-initem i-checks"
+                                                    checked="contact_tool_setting['contact_open_message']"/>
+                                    </if>
+                                </p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>再次弹出秒数</label>
+                                <p>
+                                    <input type="text" class="form-control" name="contact_tool_setting[contact_open_seconds]"
+                                           value="{$contact_tool_setting.contact_open_seconds|default='0'}" maxlength="5"
+                                           placeholder="单位秒,0表示不限制"
+                                           autocomplete="off"/>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>开启时间</label>
+                                <p>
+                                    <input type="text" class="form-control" name="contact_tool_setting[contact_start_time]"
+                                           value="{$contact_tool_setting.contact_start_time|default=''}" maxlength="5"
+                                           placeholder="留空全天开启，时间格式 - 08:30"
+                                           autocomplete="off"/>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>关闭时间</label>
+                                <p>
+                                    <input type="text" class="form-control" name="contact_tool_setting[contact_end_time]"
+                                           value="{$contact_tool_setting.contact_end_time|default=''}" maxlength="5"
+                                           placeholder="留空全天开启，时间格式 - 18:00"
+                                           autocomplete="off"/>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>微信直聊客服设置</h5>
+
+                        </div>
+                        <div class="ibox-content">
+                            <div class="form-group">
+                                <label>请关注微信公众号</label>
+                                <p class="text-center">
+                                    <img src="{$qr_code}" style="width: 60%" alt="">
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>客服微信昵称（多个请换行）</label>
+                                <p>
+                                    <textarea name="contact_tool_setting[wechat_name]" id="wechat_name" class="form-control" rows="3">{$contact_tool_setting.wechat_name|default=''}</textarea>
+
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>留言框设置</h5>
+
+                        </div>
+                        <div class="ibox-content">
+
+                            <div class="form-group">
+                                <label>留言框标题</label>
+                                <p>
+                                    <input type="text" class="form-control" name="contact_tool_setting[message_title]"
+                                           value="{$contact_tool_setting.message_title|default=''}" maxlength="14"
+                                           placeholder="商机留言"
+                                           autocomplete="off"/>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>手机端</label>
+                                <p>
+                                    <if condition="!isset($contact_tool_setting.message_enable_mobile)">
+                                        <html:radio name="contact_tool_setting[message_enable_mobile]" data='enable_list'
+                                                    class="checkbox-initem i-checks"/>
+                                        <else/>
+                                        <html:radio name="contact_tool_setting[message_enable_mobile]" data='enable_list'
+                                                    class="checkbox-initem i-checks"
+                                                    checked="contact_tool_setting['message_enable_mobile']"/>
+                                    </if>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>电脑端</label>
+                                <p>
+                                    <if condition="!isset($contact_tool_setting.message_enable_pc)">
+                                        <html:radio name="contact_tool_setting[message_enable_pc]" data='enable_list'
+                                                    class="checkbox-initem i-checks"/>
+                                        <else/>
+                                        <html:radio name="contact_tool_setting[message_enable_pc]" data='enable_list'
+                                                    class="checkbox-initem i-checks"
+                                                    checked="contact_tool_setting['message_enable_pc']"/>
+                                    </if>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>电脑端位置</label>
+                                <p>
+                                    <empty name="contact_tool_setting.message_position">
+                                        <html:radio name="contact_tool_setting[message_position]" data='position_list'
+                                                    class="checkbox-initem i-checks"/>
+                                        <else/>
+                                        <html:radio name="contact_tool_setting[message_position]" data='position_list'
+                                                    class="checkbox-initem i-checks"
+                                                    checked="contact_tool_setting['message_position']"/>
+                                    </empty>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>再次弹出秒数</label>
+                                <p>
+                                    <input type="text" class="form-control" name="contact_tool_setting[message_open_seconds]"
+                                           value="{$contact_tool_setting.message_open_seconds|default='0'}" maxlength="5"
+                                           placeholder="单位秒,0表示不限制"
+                                           autocomplete="off"/>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>开启时间</label>
+                                <p>
+                                    <input type="text" class="form-control" name="contact_tool_setting[message_start_time]"
+                                           value="{$contact_tool_setting.message_start_time|default=''}" maxlength="5"
+                                           placeholder="留空全天开启，时间格式 - 08:30"
+                                           autocomplete="off"/>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>关闭时间</label>
+                                <p>
+                                    <input type="text" class="form-control" name="contact_tool_setting[message_end_time]"
+                                           value="{$contact_tool_setting.message_end_time|default=''}" maxlength="5"
+                                           placeholder="留空全天开启，时间格式 - 18:00"
+                                           autocomplete="off"/>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>免费电话</label>
+                                <p>
+                                    <?php $false=0; ?>
+                                    <if condition="!isset($contact_tool_setting.message_call_enable)">
+                                        <html:radio name="contact_tool_setting[message_call_enable]" data='enable_list'
+                                                    class="checkbox-initem i-checks" checked="false"/>
+                                        <else/>
+                                        <html:radio name="contact_tool_setting[message_call_enable]" data='enable_list'
+                                                    class="checkbox-initem i-checks"
+                                                    checked="contact_tool_setting['message_call_enable']"/>
+                                    </if>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>基本设置</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="form-group">
+                                <label>插件KEY</label>
+                                <p>
+                                    <input type="text" required class="form-control" name="contact_tool_setting[script_key]"
+                                           value="{$contact_tool_setting.script_key|default=''}" readonly
+                                           autocomplete="off"/>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>主题颜色</label>
+                                <p>
+                                    <input type="text" required class="form-control" name="contact_tool_setting[theme_color]"
+                                           value="{$contact_tool_setting.theme_color|default='#3e8847'}" maxlength="7" minlength="7"
+                                           placeholder="默认色号#3e8847"
+                                           autocomplete="off"/>
+                                    <br>
+                                    <a href="https://html-color-codes.info/chinese/" target="_blank">选择颜色</a>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>接收留言手机号</label>
+                                <p>
+                                    <input type="text" class="form-control" id="phone" name="contact_tool_setting[phone]"
+                                           value="{$contact_tool_setting.phone|default=''}" maxlength="11"
+                                           autocomplete="off"/>
+                                </p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>抖音视频链接</label>
+                                <p>
+                                    <input type="text" class="form-control" name="copy_code1"
+                                           value="{$contact_tool_setting.copy_code[0]|default=''}" placeholder=""
+                                           autocomplete="off"/>
+                                    <span class="text-danger">格式：https://v.douyin.com/w5BrDb/</span>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>快手视频链接</label>
+                                <p>
+                                    <input type="text" class="form-control" name="copy_code2"
+                                           value="{$contact_tool_setting.copy_code[1]|default=''}" placeholder=""
+                                           autocomplete="off"/>
+                                    <span class="text-danger">格式：https://v.kuaishou.com/Q4ytQ</span>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>阿里巴巴口令</label>
+                                <p>
+                                    <input type="text" class="form-control" name="copy_code3"
+                                           value="{$contact_tool_setting.copy_code[2]|default=''}" placeholder=""
+                                           autocomplete="off"/>
+                                    <span class="text-danger">格式：8IskecO20sFas</span>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>淘宝天猫口令</label>
+                                <p>
+                                    <input type="text" class="form-control" name="copy_code4"
+                                           value="{$contact_tool_setting.copy_code[3]|default=''}" placeholder=""
+                                           autocomplete="off"/>
+                                    <span class="text-danger">格式：₴vWOGcb9yyvO₴</span>
+                                </p>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-style="zoom-in" id="submit">提交</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+            function validate() {
+                return $("#form").validate({
+                    rules: {
+                        // contact_code: {
+                        //     required: true
+                        // },
+                        // copy_code: {
+                        //     required: true
+                        // },
+                        phone: {
+                            required: true,
+                            digits: true,
+                            rangelength: [11, 11]
+                        },
+                    },
+                }).form();
+            }
+
+            $("#submit").click(function () {
+                if (validate()) {
+                    var load_btn = Ladda.create(this);
+                    load_btn.start();
+                    var data = $('#form').serialize();
+                    $.ajax({
+                        type: 'POST',
+                        url: "save",
+                        data: data,
+                        success: function (data) {
+                            if (check_status(data)) {
+                            }
+                        },
+                        error: function () {
+                            toastr["error"]('Error Occurred');
+                        }
+                    }).always(function () {
+                        load_btn.stop();
+                    });
+                }
+            });
+        });
+    </script>
+</block>

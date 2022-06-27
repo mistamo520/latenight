@@ -1,0 +1,124 @@
+<extend name='public/base'/>
+
+<block name='title'>投放区域管理</block>
+<block name='content'>
+    <div class='row wrapper border-bottom white-bg page-heading'>
+        <div class='col-lg-10'>
+            <ol class='breadcrumb'>
+                <li>
+                    <a>首页</a>
+                </li>
+                <li>
+                    <a>{$promote_type_name}设置</a>
+                </li>
+                <li class='active'>
+                    <strong>投放区域管理</strong>
+                </li>
+            </ol>
+        </div>
+        <div class='col-lg-2'>
+        </div>
+    </div>
+    <div class='wrapper wrapper-content animated fadeInRight'>
+        <div class='row'>
+            <div class='col-lg-12'>
+                <div class='ibox float-e-margins'>
+                    <div class='ibox-title'>
+                        <h5>投放区域设置</h5>
+                    </div>
+                    <div class='ibox-content'>
+                        <volist name="location_list" id="province" key="i">
+                            <div class='row m-b'>
+                                <div class='col-sm-1'>
+                                    <label for="">
+                                        <empty name="province.checked">
+                                            <input type="checkbox" name="province" value="{$province.name}"
+                                                   data-key="{$i}">
+                                            <else/>
+                                            <input type="checkbox" checked="checked" value="{$province.name}"
+                                                   name="province" data-key="{$i}">
+                                        </empty>
+                                        {$province.name}
+                                    </label>
+                                </div>
+                                <div class="col-lg-11">
+                                    <div class="row">
+                                        <volist name="province.city_list" id="city" key="j">
+                                            <div class='col-sm-1'>
+                                                <label for="">
+                                                    <empty name="city.checked">
+                                                        <input type="checkbox" name="city" value="{$city.name}"
+                                                               class="city-{$i}">
+                                                        <else/>
+                                                        <input type="checkbox" checked="checked" value="{$city.name}"
+                                                               name="city"
+                                                               class="city-{$i}">
+                                                    </empty>
+                                                    {$city.name}
+                                                </label>
+                                            </div>
+                                        </volist>
+                                    </div>
+                                </div>
+                            </div>
+                        </volist>
+
+                        <a href='javascript:;' id="btn_save"
+                           class='btn btn-primary'>保存</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name='script'>
+    <script type='text/javascript'>
+        $(document).ready(function () {
+
+            $('input[name=province]').change(function () {
+                var key = $(this).data('key');
+                if ($(this).is(':checked')) {
+                    $('.city-' + key).attr('checked', true);
+                } else {
+                    $('.city-' + key).attr('checked', false);
+                }
+            });
+
+            $('#btn_save').click(function () {
+                var load_btn = Ladda.create(this);
+                load_btn.start();
+                var province_list = [];
+                var city_list = [];
+                $('input[name=province]').each(function () {
+                    if ($(this).is(':checked')) {
+                        province_list.push($(this).val());
+                    }
+                });
+                $('input[name=city]').each(function () {
+                    if ($(this).is(':checked')) {
+                        city_list.push($(this).val());
+                    }
+                });
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'save_client',
+                    data: {
+                        province: province_list.join(';'),
+                        city: city_list.join(';'),
+                    },
+                    success: function (data) {
+                        if (check_status(data)) {
+                        }
+                    },
+                    error: function () {
+                        toastr['error']('Error Occurred');
+                    }
+                }).always(function () {
+                    load_btn.stop();
+                });
+            });
+        });
+    </script>
+</block>

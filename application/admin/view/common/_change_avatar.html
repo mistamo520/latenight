@@ -1,0 +1,89 @@
+<div class="modal-header">
+    修改头像
+</div>
+<div class="modal-body ">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="image-crop" style="position: relative;">
+                <img src="/public/user/avatar/{$user.photo}" style="width: 300px;height: 100px;">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h4>预览</h4>
+            <div class="img-preview" style="width: 100px;height: 100px;"></div>
+            <input type="file" accept="image/*" name="file" id="inputImage">
+        </div>
+    </div>
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+    <button type="button" class="btn btn-primary" data-style="zoom-in" id="upload">提交</button>
+</div>
+<script>
+    $(document).ready(function () {
+        var $image = $(".image-crop > img")
+        $($image).cropper({
+            aspectRatio: 1,
+            preview: ".img-preview",
+            done: function (data) {
+                // Output the result data for cropping image.
+
+            }
+        });
+
+        $('#upload').click(function () {
+            var load_btn = Ladda.create(this);
+            load_btn.start();
+            var photo = $image.cropper("getDataURL");
+            $.ajax({
+                type: 'POST',
+                url: "{:url('common/change_avatar')}",
+                data: {'photo': photo},
+                success: function (data) {
+                    if (check_status(data)) {
+                        $("#avatar").attr('src', $image.cropper("getDataURL"));
+                        $("#modal-md").modal('hide');
+                    }
+                },
+                error: function () {
+                    toastr["error"]('An error has occurred');
+                }
+            }).always(function () {
+                load_btn.stop();
+            });
+
+
+        });
+        var $inputImage = $("#inputImage");
+        if (window.FileReader) {
+            $inputImage.change(function () {
+                var fileReader = new FileReader(),
+                    files = this.files,
+                    file;
+
+                if (!files.length) {
+                    return;
+                }
+
+                file = files[0];
+                if (file.size >= 1 * 1024 * 1024) {
+                    $inputImage.val("");
+                    return toastr["error"]("请选择小于1M的图片.");
+                }
+                if (/^image\/\w+$/.test(file.type)) {
+                    fileReader.readAsDataURL(file);
+                    fileReader.onload = function () {
+                        $inputImage.val("");
+                        $image.cropper("reset", true).cropper("replace", this.result);
+                    };
+                } else {
+                    $inputImage.val("");
+                    toastr["error"]("请选择上传的图片.");
+                }
+            });
+        } else {
+            $inputImage.addClass("hide");
+        }
+    });
+</script>

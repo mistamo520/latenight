@@ -1,0 +1,96 @@
+<div class='modal-header'>
+    {$edit_state? '修改' : '新增'}{$title}
+</div>
+<div class='modal-body '>
+    <form class='' role='form' id='form'>
+        <input type='hidden' name='id' value='{$model.id|default=""}'/>
+        <div class='row'>
+            <empty name="client_user_id">
+                <div class='col-sm-12'>
+                    <div class='form-group'>
+                        <label>客户</label>
+                        <p>
+                            <empty name="edit_state">
+                                <html:select id='user_id' name='user_id' data='user_list' class='form-control'
+                                             selected='model["user_id"]'/>
+                                <else/>
+                                <input type="hidden" name="user_id" value="{$model.user_id}">
+                                <span class="form-control">{$model.user.name}</span>
+                            </empty>
+                        </p>
+                    </div>
+                </div>
+                <else/>
+                <input type="hidden" value="{$client_user_id}" name="user_id">
+            </empty>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>{$title}名称</label>
+                    <p><input type='text' class='form-control' id='name' name='name' value='{$model.name|default=""}' required
+                              autocomplete='off'/></p>
+                </div>
+            </div>
+            <notempty name="is_admin">
+                <div class='col-sm-12'>
+                    <div class='form-group'>
+                        <label>{$title}ID(对应API编号)</label>
+                        <p>
+                            <eq name="promote_type" value="4">
+                                <input type='text' class='form-control' id='baidu_id' name='baidu_id' readonly
+                                       value='{$model.baidu_id|default=""}'
+                                       autocomplete='off'/>
+                                <else/>
+                                <input type='text' required class='form-control' id='baidu_id' name='baidu_id'
+                                       value='{$model.baidu_id|default=""}'
+                                       autocomplete='off'/>
+                            </eq>
+                        </p>
+                    </div>
+                </div>
+            </notempty>
+        </div>
+    </form>
+</div>
+<div class='modal-footer'>
+    <button type='button' class='btn btn-default' data-dismiss='modal'>取消</button>
+    <button type='button' class='btn btn-primary' data-style='zoom-in' id='submit'>提交</button>
+</div>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+        function validate() {
+            return $('#form').validate({
+                rules: {
+                    key: {
+                        required: true,
+                    }
+                },
+            }).form();
+        }
+
+        $('#user_id').select2();
+        $('#submit').click(function () {
+            if (validate()) {
+                var load_btn = Ladda.create(this);
+                load_btn.start();
+                var data = $('#form').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: 'save',
+                    data: data,
+                    success: function (data) {
+                        if (check_status(data)) {
+                            $('#modal-sm').modal('hide');
+                            data_table.draw();
+                        }
+                    },
+                    error: function () {
+                        toastr['error']('Error Occurred');
+                    }
+                }).always(function () {
+                    load_btn.stop();
+                });
+            }
+        });
+    });
+</script>

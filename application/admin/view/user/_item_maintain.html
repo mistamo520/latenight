@@ -1,0 +1,167 @@
+<div class="modal-header">
+    {$edit_state? '修改' : '新增'}
+</div>
+<div class="modal-body">
+    <form class="" role="form" id="form">
+        <input type="hidden" id="id" name="id" value="{$model.id|default=''}"/>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>用户名</label>
+                    <p>
+                        <input type="text" class="form-control" id="user_name" name="user_name"
+                               value="{$model.user_name|default=''}"
+                               autocomplete="off"/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>姓名</label>
+                    <p>
+                        <input type="text" class="form-control" id="name" name="name"
+                               value="{$model.name|default=''}"
+                               autocomplete="off"/>
+                    </p>
+                </div>
+            </div>
+            <if condition="$edit_state eq false">
+                <div class="form-group col-sm-6">
+                    <label>密码</label>
+                    <p>
+                        <input type="password" class="form-control" id="password" name="password"
+                               autocomplete="off"/>
+                    </p>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label>确认密码</label>
+                    <p>
+                        <input type="password" class="form-control" id="confirmpassword" name="confirmpassword"
+                               autocomplete="off"/>
+                    </p>
+                </div>
+            </if>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>手机号</label>
+                    <p>
+                        <input type="text" class="form-control" id="phone" name="phone" maxlength="11"
+                               value="{$model.phone|default=''}" autocomplete="off"/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>邮箱</label>
+                    <p>
+                        <input type="text" class="form-control" id="email" name="email"
+                               value="{$model.email|default=''}" autocomplete="off"/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>角色</label>
+                    <p>
+                        <html:select name="role_id" data='role_list' class="form-control"
+                                     selected="model['role_id']" data-value="id" data-key="name"
+                                     first="请选择"/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>状态</label>
+                    <p>
+                        <html:radio name="active" data='active_list' class="checkbox-initem i-checks"
+                                    checked="model['active']"/>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+    <button type="button" class="btn btn-primary" data-style="zoom-in" id="submit">提交</button>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+        $('.input-group.date.select').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            format: "yyyy-mm-dd",
+            language: "zh-CN",
+        });
+
+        function validate() {
+            if ($("#password").length == 0) {
+                return $("#form").validate({
+                    rules: {
+                        name: {
+                            required: true
+                        },
+                        user_name: {
+                            required: true,
+                        },
+                        role_id: {
+                            required: true
+                        },
+                    },
+                }).form();
+            } else {
+                return $("#form").validate({
+                    rules: {
+                        name: {
+                            required: true
+                        },
+                        user_name: {
+                            required: true,
+                        },
+                        password: {
+                            required: true,
+                        },
+                        confirmpassword: {
+                            required: true,
+                            equalTo: "#password"
+                        },
+                        role_id: {
+                            required: true
+                        },
+                    },
+                }).form();
+            }
+        }
+
+        $("#submit").click(function () {
+            if (validate()) {
+                var load_btn = Ladda.create(this);
+                load_btn.start();
+                var data = $('#form').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: "save",
+                    data: data,
+                    success: function (data) {
+                        if (check_status(data)) {
+                            $('#modal-md').modal('hide');
+                            data_table.draw();
+                        }
+                    },
+                    error: function () {
+                        toastr["error"]('Error Occurred');
+                    }
+                }).always(function () {
+                    load_btn.stop();
+                });
+            }
+        });
+    });
+</script>

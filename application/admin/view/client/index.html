@@ -1,0 +1,182 @@
+<extend name="public/base"/>
+
+<block name="title">客户管理</block>
+<block name="content">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <ol class="breadcrumb">
+                <li>
+                    <a>首页</a>
+                </li>
+                <li class="active">
+                    <strong>客户管理</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>客户列表</h5>
+
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="input-group m-b">
+                                        <input type="text" class="form-control" id="search_keyword"
+                                               placeholder="客户账户 / 名称 / 手机号 / 代理商">
+                                        <span class="input-group-btn">
+                                            <button type="button" id="search-button" class="btn btn-primary">查询</button> </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="text-right">
+                                    <a data-toggle="modal" data-target="#modal-md" href="_item_maintain"
+                                       class="btn btn-primary">新增</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="data-table" style="width:100%;"
+                                   class="table table-striped  table-hover dataTables-example dataTable border-bottom"
+                                   aria-describedby="DataTables_Table_0_info" role="grid">
+                                <thead>
+                                <tr role="row">
+                                    <th>客户账户</th>
+                                    <th>客户名称</th>
+                                    <th>代理商</th>
+                                    <th>联系人</th>
+                                    <th>手机号</th>
+                                    <th>版本</th>
+                                    <th>有效期</th>
+                                    <th>账户余额</th>
+                                    <th>计费系数</th>
+                                    <th>业务员</th>
+                                    <th>状态</th>
+                                    <th>创建时间</th>
+                                    <th></th>
+                                    <th width="100px"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var query = function (params) {
+                params.query = $('#search_keyword').val();
+                params.campus_id = $('#campus-list').val();
+                params.college_id = $('#college-list').val();
+            };
+            var columns = [
+                {
+                    "data": null,
+                    "render": function (data) {
+                        return (data.balance < 1000 || data.status == '已过期') ? ('<span style="color:red">' + data.user_name + '</span>') : data.user_name;
+                    }
+                },
+                {"data": "name"},
+                {"data": "agent_name"},
+                {"data": "contact"},
+                {"data": "phone"},
+                {"data": "version"},
+                {"data": "expired_date"},
+                {"data": "balance"},
+                {"data": "rate"},
+                {"data": "salesman"},
+                {"data": "status"},
+                {"data": "created_time"},
+                {
+                    "data": null,
+                    "render": function (data) {
+                        return '<a href="client_login/id/' + data.id + '.html">一键登录</a> ' +
+                            '<a data-toggle="modal" data-target="#modal-sm" title="" href="_item_payment/id/' + data.id + '.html">充值</a>';
+                    }
+                },
+                {
+                    "data": null,
+                    "render": function (data) {
+                        if (data.id == 1) {
+                            return '';
+                        }
+                        return '<a class="btn-edit" data-toggle="modal" data-target="#modal-md" title="修改" href="_item_maintain/id/' + data.id + '.html"><i class="fa fa-pencil"></i></a>&nbsp;' +
+                            '<a data-toggle="modal" data-target="#modal-sm" title="重置密码"  href="_reset_password/id/' + data.id + '.html"><i class="fa fa-wrench"></i></a>&nbsp;' ;
+                            //(data.id <= 2 ? '' : '<a title="删除" href="javascript:void(0);" onclick="delete_item(' + data.id + ');"><i class="fa fa-trash"></i></a>');
+                    }
+                }
+            ];
+            load_list(query, columns);
+        });
+
+        window.Clipboard = (function (window, document, navigator) {
+            var textArea, copy;
+
+            function isOS() {
+                return navigator.userAgent.match(/ipad|iphone/i);
+            }
+
+            function createTextArea(text) {
+                textArea = document.createElement('textArea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+            }
+
+            function selectText() {
+                var range,
+                    selection;
+
+                if (isOS()) {
+                    range = document.createRange();
+                    range.selectNodeContents(textArea);
+                    selection = window.getSelection();
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                    textArea.setSelectionRange(0, 999999);
+                } else {
+                    textArea.select();
+                }
+            }
+
+            function copyToClipboard() {
+                try {
+                    if (document.execCommand("Copy")) {
+                        console.log('copy success');
+                    } else {
+                        console.log('copy fail');
+
+                    }
+                } catch (err) {
+                    console.log(2);
+                }
+                document.body.removeChild(textArea);
+            }
+
+            copy = function (text) {
+                createTextArea(text);
+                selectText();
+                copyToClipboard();
+            };
+            return {
+                copy: copy
+            };
+        })(window, document, navigator);
+
+    </script>
+</block>

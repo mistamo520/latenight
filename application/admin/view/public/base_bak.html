@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>
+        <block name="title">首页</block>
+    </title>
+    <!-- ladda style -->
+    <link href="/public/static/admin/css/plugins/ladda/ladda.min.css" rel="stylesheet">
+    <link href="/public/static/admin/css/plugins/ladda/ladda-themeless.min.css" rel="stylesheet">
+    <link href="/public/static/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/static/admin/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <!-- Toastr style -->
+    <link href="/public/static/admin/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <!-- Gritter -->
+    <link href="/public/static/admin/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+    <link href="/public/static/admin/css/animate.css" rel="stylesheet">
+    <link href="/public/static/admin/css/style.css" rel="stylesheet">
+    <link href="/public/static/admin/css/custom.css" rel="stylesheet">
+    <link href="/public/static/admin/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+    <link href="/public/static/admin/css/plugins/select2/select2.min.css" rel="stylesheet">
+    <link href="/public/static/admin/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="/public/static/admin/css/plugins/datepicker/datepicker3.css" rel="stylesheet">
+    <link href="/public/static/admin/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"
+          rel="stylesheet">
+    <link href="/public/static/admin/css/plugins/jsTree/style.css" rel="stylesheet">
+    <link href="/public/static/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/public/static/admin/css/plugins/cropper/cropper.min.css" rel="stylesheet">
+    <link href="/public/static/admin/css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
+    <link href="/public/static/admin/css/plugins/steps/jquery.steps.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/kindeditor/themes/default/default.css"/>
+    <link rel="stylesheet" href="/public/kindeditor/plugins/code/prettify.css"/>
+</head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <div class="fl">
+                        <span>
+                            <img width="48" alt="image" id="avatar" class="img-circle"
+                                 src="/public/user/avatar/{$user.photo}"/>
+                             </span></div>
+                        <div class="fl m-l">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong
+                                    class="font-bold">{$user.name}</strong>
+                             </span> <span class="text-muted text-xs block">{$user.role['name']}<b class="caret"></b>  </span> </span>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a id="btn-change-avatar">修改头像</a></li>
+                                <li><a id="btn-change-password">修改密码</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{:url('index/logout')}">退出登录</a></li>
+                            </ul>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="logo-element">
+                        FMS
+                    </div>
+                </li>
+                <volist name="menu" id="vo">
+                    <empty name="vo['children']">
+                        <li>
+                            <a href="{:url('admin/'.$vo[0].'/index')}">
+                                <i class="fa fa-{$vo[2]}"></i>
+                                <span class="nav-label">{$vo[1]}</span>
+                                <eq name="vo[0]" value="remind">
+                                    <notempty name="notification.remind">
+                                        <span class="badge badge-danger">{$notification.remind}</span></notempty>
+                                </eq>
+                                <eq name="vo[0]" value="order_review">
+                                    <notempty name="notification.order">
+                                        <span class="badge badge-danger">{$notification.order}</span></notempty>
+                                </eq>
+                            </a>
+                        </li>
+                        <else/>
+                        <li>
+                            <a>
+                                <i class="fa fa-{$vo[2]}"></i>
+                                <span class="nav-label">{$vo[1]}</span>
+                                <span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level collapse">
+                                <volist name="vo['children']" id="child">
+                                    <li>
+                                        <empty name="child[2]">
+                                            <a href="{:url('admin/'.$child[0].'/index')}">{$child[1]}</a>
+                                            <else/>
+                                            <a href="{:url('admin/'.$child[0].'/'.$child[2])}">{$child[1]}</a>
+                                        </empty>
+                                    </li>
+                                </volist>
+                            </ul>
+                        </li>
+                    </empty>
+                </volist>
+            </ul>
+
+        </div>
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i>
+                    </a>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <a href="{:url('index/logout')}" title='退出登录'>
+                            <i class="fa fa-sign-out"></i>
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+        <block name="content">
+        </block>
+    </div>
+</div>
+
+<div class="modal inmodal fade" id="modal-md" role="dialog" aria-hidden="true"
+     data-keyboard="true" tabindex="-1" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+<div class="modal inmodal fade" id="modal-sm" role="dialog" aria-hidden="true"
+     data-keyboard="true" tabindex="-1" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+<div class="modal inmodal fade" id="modal-lg" role="dialog" aria-hidden="true"
+     data-keyboard="true" tabindex="-1" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+<!-- Mainly scripts -->
+<script src="/public/static/admin/js/jquery-3.1.1.min.js"></script>
+<script src="/public/static/admin/js/bootstrap.min.js"></script>
+<script src="/public/static/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/public/static/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/public/static/admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/public/static/admin/js/plugins/validate/messages_zh_cn.min.js"></script>
+<script src="/public/static/admin/js/plugins/steps/jquery.steps.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="/public/static/admin/js/inspinia.js"></script>
+<script src="/public/static/admin/js/plugins/pace/pace.min.js"></script>
+
+<!-- jQuery UI -->
+<script src="/public/static/admin/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- GITTER -->
+<script src="/public/static/admin/js/plugins/gritter/jquery.gritter.min.js"></script>
+
+<!-- Sparkline -->
+<script src="/public/static/admin/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+<script src="/public/static/admin/js/plugins/ajaxfileupload/ajaxfileupload.js"></script>
+
+
+<!-- Toastr -->
+<script src="/public/static/admin/js/plugins/toastr/toastr.min.js"></script>
+
+<script src="/public/static/admin/js/plugins/dataTables/datatables.min.js"></script>
+<script src="/public/static/admin/js/plugins/dataTables/zh-CN.js"></script>
+<script src="/public/static/admin/js/plugins/pubsub/pubsub.js"></script>
+
+<!-- Ladda -->
+<script src="/public/static/admin/js/plugins/ladda/spin.min.js"></script>
+<script src="/public/static/admin/js/plugins/ladda/ladda.min.js"></script>
+<script src="/public/static/admin/js/plugins/ladda/ladda.jquery.min.js"></script>
+<script src="/public/static/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/public/static/admin/js/plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="/public/static/admin/js/plugins/datepicker/bootstrap-datepicker.zh-CN.min.js"></script>
+<script src="/public/static/admin/js/plugins/jsTree/jstree.min.js"></script>
+<!-- iCheck -->
+<script src="/public/static/admin/js/plugins/iCheck/icheck.min.js"></script>
+<!-- Select2 -->
+<script src="/public/static/admin/js/plugins/select2/select2.full.min.js"></script>
+<script src="/public/static/admin/js/plugins/select2/zh-HK.js"></script>
+<!-- TouchSpin -->
+<script src="/public/static/admin/js/plugins/touchspin/jquery.bootstrap-touchspin.min.js"></script>
+<script src="/public/static/admin/js/plugins/cropper/cropper.min.js"></script>
+<!-- Common -->
+<script src="/public/static/admin/js/common/date.js"></script>
+<script src="/public/static/admin/js/common/common.js"></script>
+<script src="/public/static/admin/js/view/base.js"></script>
+<!-- KindEditor -->
+<script src="/public/kindeditor/kindeditor-min.js"></script>
+<script src="/public/kindeditor/plugins/code/prettify.js" charset="utf-8"></script>
+<block name="script">
+
+</block>
+<script>
+    var change_password_url = "{:url('common/_change_password')}",
+        change_avatar_url = "{:url('common/_change_avatar')}";
+    var page_length = 20;
+    var data_table;
+</script>
+</body>
+</html>

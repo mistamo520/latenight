@@ -1,0 +1,142 @@
+<div class='modal-header'>
+    {$edit_state? '修改创意' : '新增创意'}
+</div>
+<div class='modal-body '>
+    <form class='' role='form' id='form' enctype="multipart/form-data">
+        <input type='hidden' name='id' value='{$model.id|default=""}'/>
+        <div class='row'>
+            <empty name="client_user_id">
+                <div class='col-sm-12'>
+                    <div class='form-group'>
+                        <label>客户</label>
+                        <p>
+                            <empty name="edit_state">
+                                <html:select id='user_id' name='user_id' data='user_list' class='form-control'
+                                             selected='model["user_id"]'/>
+                                <else/>
+                                <input type="hidden" name="user_id" value="{$model.user_id}">
+                                <span class="form-control">{$model.user.name}</span>
+                            </empty>
+                        </p>
+                    </div>
+                </div>
+                <else/>
+                <input type="hidden" value="{$client_user_id}" name="user_id">
+            </empty>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>所属{$title}</label>
+                    <p>
+                        <html:select id='unit_id' name='unit_id' data='unit_list' class='form-control'
+                                     selected='model["unit_id"]' data-key="name" data-value="id" data-parent="user_id"
+                                     first="请选择"/>
+                    </p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>标题（关键词{}  {投放地域}）</label>
+                    <p><input type='text' class='form-control' id='title' required name='title'
+                              value='{$model.title|default=""}'
+                              autocomplete='off' minlength="9" maxlength="50" placeholder="9-50个字符"/>
+                        <br>
+                        例如：<span class="text-danger">{投放地域}{网站建设}</span>—全网营销型<span class="text-danger">{网站建设}</span>解决方案
+                    </p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>描述第一行（关键词{}）</label>
+                    <p><textarea name="description" id="description" minlength="9" maxlength="80"
+                                 placeholder="9-80个字符，建议添加30个字符以上" class='form-control' rows="2">{$model.description|default=""}</textarea>
+                    </p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>描述第二行（关键词{}）</label>
+                    <p><textarea name="description2" id="description2" class='form-control' minlength="9" maxlength="80"
+                                 placeholder="9-80个字符，建议添加30个字符以上" rows="2">{$model.description2|default=""}</textarea>
+                    </p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>
+                        主图 <span class="text-danger"></span> <a onclick="$('#picture').click()">点击上传 <i
+                            class="fa fa-upload"></i>
+
+                    </a>
+                    </label>
+                    <notempty name="model.image">
+                        <input type="text" value="{$setting['system.website_domain']}{$model.image}"
+                               class="form-control"/>
+                    </notempty>
+                    <p>
+                        <img id="preview" src="{$model.image|default=''}" width="60%">
+                        <br>
+                        （尺寸：比例1.61:1，最小323*200， 格式：JPG、JPEG、PNG格式， 大小：2MB以内）
+                    </p>
+                    <input id="picture" name="picture" type="file" accept="image/*" style="display: none;"
+                           onchange="document.getElementById('preview').src = window.URL.createObjectURL(document.getElementById('picture').files[0])">
+                    <input type='hidden' class='form-control' name='image'
+                           value='{$model.image|default=""}' autocomplete='off'/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class='modal-footer'>
+    <button type='button' class='btn btn-default' data-dismiss='modal'>取消</button>
+    <button type='button' class='btn btn-primary' data-style='zoom-in' id='submit'>提交</button>
+</div>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+        if ($('#user_id').length > 0) {
+            $("#user_id").change(function () {
+                $('#unit_id').val("");
+                $('#unit_id option').not(':first').addClass('hidden').filter('[data-parent^="' + $('#user_id').val() + '"]').removeClass('hidden');
+            });
+            $('#user_id').change();
+        } else {
+            $('#unit_id option').removeClass('hidden');
+        }
+
+        function validate() {
+            return $('#form').validate({
+                rules: {
+                    unit_id: {
+                        required: true,
+                    }
+                },
+            }).form();
+        }
+
+        $('#submit').click(function () {
+            if (validate()) {
+                var load_btn = Ladda.create(this);
+                load_btn.start();
+                var data = new FormData($('#form')[0]);
+                $.ajax({
+                    type: 'POST',
+                    url: 'save',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        if (check_status(data)) {
+                            $('#modal-md').modal('hide');
+                            data_table.draw();
+                        }
+                    },
+                    error: function () {
+                        toastr['error']('Error Occurred');
+                    }
+                }).always(function () {
+                    load_btn.stop();
+                });
+            }
+        });
+    });
+</script>

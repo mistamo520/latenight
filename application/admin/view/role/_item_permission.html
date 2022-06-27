@@ -1,0 +1,167 @@
+<style>
+    .tree-item-icon-color {
+        color: #dfba49;
+    }
+</style>
+<div class="modal-header">
+    权限设置
+</div>
+<div class="modal-body ">
+    <input type="hidden" id="id" value="{$model.id|default=''}"/>
+    <div class="row">
+        <div class="col-lg-6">
+            <div id="system-permission" class="treeview"></div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+    <button type="button" class="btn btn-primary" data-style="zoom-in" id="submit">提交</button>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var system_check_ids = '{$system_permissions}';
+
+        var system_permission_tree = new PermissionsTree('system');
+        system_permission_tree.init($("#system-permission"), system_check_ids);
+        $("#submit").click(function () {
+            var load_btn = Ladda.create(this);
+            load_btn.start();
+
+            var system_permission = getCheckboxTreeSelNode("system-permission");
+            system_permission = system_permission.join(",");
+
+            $.ajax({
+                type: 'POST',
+                url: "save_permission",
+                data: {
+                    role_id: $("#id").val(),
+                    system_permission: system_permission
+                },
+                success: function (data) {
+                    if (check_status(data)) {
+                        $("#modal-sm").modal('hide');
+                    }
+                },
+                error: function () {
+                    toastr["error"]('Error Occurred');
+                }
+            }).always(function () {
+                load_btn.stop();
+            });
+        });
+    });
+
+    function getCheckboxTreeSelNode(treeid) {
+        var ids = Array();
+
+        //checked nodes
+        var selectedNodes = jQuery("#" + treeid).jstree("get_selected", true);
+        $.each(selectedNodes, function () {
+            ids.push(this.id);
+        });
+
+        //undetermined nodes
+        jQuery("#" + treeid).find(".jstree-undetermined").each(function (i, element) {
+            ids.push($(element).closest('.jstree-node').attr("id"));
+        });
+
+        return ids;
+    }
+
+    var PermissionsTree = (function ($) {
+        return function (type) {
+            var $tree;
+
+            function init($treeContainer, checkId) {
+                $tree = $treeContainer;
+                $tree.jstree({
+                    "types": {
+                        "default": {
+                            "icon": "fa fa-folder tree-item-icon-color"
+                        },
+                        "file": {
+                            "icon": "fa fa-file tree-item-icon-color"
+                        }
+                    },
+                    "core": {
+                        "data": {
+                            "url": "get_" + type + "_permissions",
+                            "dataType": "json",
+                            "cache": true,
+                            "dblclick_toggle": false
+                        },
+                        "attr": {
+                            "class": "jstree-checked"
+                        }
+                    },
+                    'checkbox': {
+                        keep_selected_style: false,
+                        three_state: false,
+                        cascade: ''
+                    },
+                    plugins: ['checkbox', 'types']
+                }).on('loaded.jstree', function () {
+                    $tree.jstree('open_all');
+                    $tree.find("li").each(function () {
+                        if (checkId == 'all') {
+                            $tree.jstree("check_node", $(this));
+                        } else if (checkId != "") {
+                            var checkIds = checkId.split(',');
+                            for (var i = 0; i < checkIds.length; i++) {
+                                if ($(this).attr("id") == checkIds[i]) {
+                                    $tree.jstree("check_node", $(this));
+                                }
+                            }
+                        }
+                    });
+                });
+                ;
+                $tree.on("changed.jstree", function (e, data) {
+                    if (!data.node) {
+                        return;
+                    }
+
+                    var childrenNodes;
+
+                    if (data.node.state.selected) {
+                        selectNodeAndAllParents($tree.jstree('get_parent', data.node));
+
+                        // childrenNodes = $.makeArray($tree.jstree('get_children_dom', data.node));
+                        // $tree.jstree('select_node', childrenNodes);
+
+                    } else {
+                        childrenNodes = $.makeArray($tree.jstree('get_children_dom', data.node));
+                        $tree.jstree('deselect_node', childrenNodes);
+                    }
+                });
+            };
+
+            function selectNodeAndAllParents(node) {
+                $tree.jstree('select_node', node, true);
+                var parent = $tree.jstree('get_parent', node);
+                if (parent) {
+                    selectNodeAndAllParents(parent);
+                }
+            };
+
+            function getSelectedPermissionNames() {
+                var permissionNames = [];
+
+                var selectedPermissions = $tree.jstree('get_selected', true);
+                for (var i = 0; i < selectedPermissions.length; i++) {
+                    permissionNames.push(selectedPermissions[i].id);
+                }
+
+                return permissionNames;
+            };
+
+            return {
+                init: init,
+                getSelectedPermissionNames: getSelectedPermissionNames
+            }
+        }
+    })(jQuery);
+</script>

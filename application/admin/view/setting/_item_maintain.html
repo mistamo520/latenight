@@ -1,0 +1,120 @@
+<div class="modal-header">
+    {$edit_state? '修改' : '新增'}
+</div>
+<div class="modal-body ">
+    <!-- form begin -->
+    <form  role="form" id="form">
+        <input type="hidden" name="id" value="{$model.id|default=''}"/>
+        <div class="row">
+            <if condition="$edit_state eq false">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>类型</label>
+                        <p>
+                            <html:select id="type" name="type" data='type_list'
+                                         class="form-control" selected="model['type']" first="请选择"/>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>项目</label>
+                        <p>
+                            <html:select id="code" name="code" data='code_list'
+                                         class="form-control" selected="model['code']" first="请选择"/>
+                        </p>
+                    </div>
+                </div>
+                <else/>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>类型</label>
+                        <p>
+                            <span class="form-control">{$model.type}</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>项目</label>
+                        <p>
+                            <span class="form-control">{$model.code}</span>
+                        </p>
+                    </div>
+                </div>
+            </if>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>配置</label>
+                    <p>
+                        <textarea name="value" class="form-control"  cols="30" rows="10">{$model.value|default=''}</textarea>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- form end -->
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+    <button type="button" class="btn btn-primary" data-style="zoom-in" id="submit">提交</button>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        function validate() {
+            if ($("#type")) {
+                return $("#form").validate({
+                    rules: {
+                        type: {
+                            required: true,
+                        },
+                        code: {
+                            required: true,
+                        },
+                        value: {
+                            required: true,
+                        }
+                    },
+                }).form();
+            } else {
+                return $("#form").validate({
+                    rules: {
+                        value: {
+                            required: true,
+                        }
+                    },
+                }).form();
+            }
+        }
+        $("#code").find('option').addClass('hidden');
+        $("#type").change(function () {
+            $("#code").find('option').addClass('hidden');
+            $("#code").find('option[value*="' + $("#type").val() + '"]').removeClass('hidden');
+        });
+
+        $("#submit").click(function () {
+            if (validate()) {
+                var load_btn = Ladda.create(this);
+                load_btn.start();
+                var submitData = $('#form').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: "save",
+                    data: submitData,
+                    success: function (data) {
+                        if (check_status(data)){
+                            $('#modal-sm').modal('hide');
+                            data_table.draw();
+                        }
+                    },
+                    error: function () {
+                        toastr["error"]('Error Occurred');
+                    }
+                }).always(function () {
+                    load_btn.stop();
+                });
+            }
+        });
+    });
+</script>

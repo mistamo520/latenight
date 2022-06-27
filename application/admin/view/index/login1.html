@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>非企开户系统</title>
+    <link rel="stylesheet" href="/public/static/admin/login1/style.css">
+    <link href="/public/static/admin/css/plugins/ladda/ladda.min.css" rel="stylesheet">
+    <link href="/public/static/admin/css/plugins/ladda/ladda-themeless.min.css" rel="stylesheet">
+    <link href="/public/static/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/static/admin/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/public/static/admin/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="videozz"></div>
+
+<div class="box">
+    <div class="box-a">
+        <div class="m-2">
+            <div class="m-2-1">
+                <form  id="form" role="form">
+                    <div class="m-2-2" style="margin-bottom: 40px;">
+
+                        <input type="text" name="user_name" placeholder="请输入用户名" maxlength="20" required="" value=""
+                               autocomplete="off">
+                    </div>
+                    <div class="m-2-2" style="margin-bottom: 60px;">
+                        <input type="password" name="password" placeholder="请输入密码" autocomplete="off">
+                    </div>
+                    <div class="m-2-2">
+                        <button class="btn" id="submit">登录</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="m-5">
+            <div id="m-5-id-1">
+                <div id="m-5-2">
+                    <div id="m-5-id-2">
+                    </div>
+                    <div id="m-5-id-3"></div>
+                </div>
+            </div>
+        </div>
+        <div class="m-10"></div>
+        <div class="m-xz7"></div>
+        <div class="m-xz8 xzleft"></div>
+        <div class="m-xz9"></div>
+        <div class="m-xz9-1"></div>
+        <!-- <div class="m-x10"></div>
+        <div class="m-x11"></div>
+        <div class="m-x12 xzleft"></div>
+        <div class="m-x13"></div>
+        <div class="m-x14 xzleft"></div>
+        <div class="m-x15"></div>
+        <div class="m-x16 xzleft"></div>-->
+        <div class="m-x17 xzleft"></div>
+        <div class="m-x18"></div>
+        <div class="m-x19 xzleft"></div>
+        <div class="m-x20"></div>
+        <div class="m-8"></div>
+        <div class="m-9">
+            <div class="masked1" id="sx8">非企开户系统</div>
+        </div>
+        <div class="m-11">
+            <div class="m-k-1">
+                <div class="t1"></div>
+            </div>
+            <div class="m-k-2">
+                <div class="t2"></div>
+            </div>
+            <div class="m-k-3">
+                <div class="t3"></div>
+            </div>
+            <div class="m-k-4">
+                <div class="t4"></div>
+            </div>
+            <div class="m-k-5">
+                <div class="t5"></div>
+            </div>
+            <div class="m-k-6">
+                <div class="t6"></div>
+            </div>
+            <div class="m-k-7">
+                <div class="t7"></div>
+            </div>
+        </div>
+        <div class="m-14">
+            <div class="ss"></div>
+        </div>
+        <div class="m-15-a">
+            <div class="m-15-k">
+                <div class="m-15xz1">
+                    <div class="m-15-dd2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="m-16"></div>
+        <div class="m-17"></div>
+        <div class="m-18 xzleft"></div>
+        <div class="m-19"></div>
+        <div class="m-20 xzleft"></div>
+        <div class="m-21"></div>
+        <div class="m-22"></div>
+        <div class="m-23 xzleft"></div>
+        <div class="m-24" id="localtime"></div>
+    </div>
+</div>
+
+
+<script src="/public/static/admin/js/jquery-3.1.1.min.js"></script>
+<script src="/public/static/admin/js/bootstrap.min.js"></script>
+<script src="/public/static/admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/public/static/admin/js/plugins/ladda/spin.min.js"></script>
+<script src="/public/static/admin/js/plugins/ladda/ladda.min.js"></script>
+<script src="/public/static/admin/js/plugins/ladda/ladda.jquery.min.js"></script>
+<script src="/public/static/admin/js/plugins/toastr/toastr.min.js"></script>
+<script src="/public/static/admin/login1/common.min.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        var whei = $(window).width()
+        $("html").css({fontSize: whei / 24});
+        $(window).resize(function () {
+            var whei = $(window).width();
+            $("html").css({fontSize: whei / 24})
+        });
+    });
+    $(function () {
+        function validate() {
+            return $("#form").validate({
+                rules: {
+                    user_name: {
+                        required: true,
+                    },
+                    password: {
+                        required: true,
+                    },
+                },
+                errorPlacement: function (error, element) {
+                },
+                showErrors: function (errorMap, errorList) {
+                    if (errorList.length > 0) {
+                        toastr.remove();
+                        toastr.error('请输入用户名密码');
+                    }
+                    this.defaultShowErrors();
+                }
+            }).form();
+        }
+
+        $("input[name='user_name']").focus();
+
+        $("input[name='user_name']").keydown(function (e) {
+            if ($(this).val() != '' && e.which == 13) {
+                $("input[name='password']").focus();
+            }
+        });
+        $("input[name='password']").keydown(function (e) {
+            if ($(this).val() != '' && e.which == 13) {
+                $("#submit").click();
+            }
+        });
+        $("#submit").click(function () {
+            if (validate()) {
+                var load_btn = Ladda.create(this);
+                load_btn.start();
+                var data = $('#form').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: "",
+                    data: data,
+                    success: function (data) {
+                        if (data.status == 0) {
+                            load_btn.stop();
+                            toastr.remove();
+                            toastr.error(data.message);
+                        } else {
+                            toastr.remove();
+                            toastr.success('登录成功');
+                            setTimeout(function () {
+                                window.location.href = '../' + data.url + '/index.html';
+                            }, 700);
+                        }
+                    },
+                    error: function () {
+                        load_btn.stop();
+                        toastr.remove();
+                        toastr.error('Error Occurred');
+                    }
+                }).always(function () {
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>用户登录</title>
+
+    <link href="/public/static/admin/css/plugins/ladda/ladda.min.css" rel="stylesheet">
+    <link href="/public/static/admin/css/plugins/ladda/ladda-themeless.min.css" rel="stylesheet">
+    <link href="/public/static/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/static/admin/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/public/static/admin/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+
+    <link href="/public/static/admin/css/animate.css" rel="stylesheet">
+    <link href="/public/static/admin/css/style.css" rel="stylesheet">
+    <link href="/public/static/admin/css/custom.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background: url(/public/static/admin/img/login_bg.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        .logo-name, h3 {
+            color: white;
+            font-size: 30px;
+            line-height: 50px;
+            letter-spacing: normal;
+            font-weight: bold;
+        }
+
+        .logo-name {
+            font-size: 50px;
+        }
+    </style>
+</head>
+
+<body class="gray-bg">
+
+<div class="middle-box text-center loginscreen animated fadeInDown">
+    <div>
+        <div style="padding-top: 300px;">
+            <span class="logo-name">{$oem_name}系统</span>
+
+        </div>
+        <h3>后台管理</h3>
+
+        <form id="form" class="m-t" role="form">
+            <div class="form-group">
+                <input type="text" name="user_name" class="form-control" placeholder="用户名" required="">
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" class="form-control" placeholder="密码" required="">
+            </div>
+            <button id="submit" type="button" class="btn btn-primary block full-width m-b" data-style="zoom-in">登录
+            </button>
+
+        </form>
+    </div>
+</div>
+
+<!-- Mainly scripts -->
+<script src="/public/static/admin/js/jquery-3.1.1.min.js"></script>
+<script src="/public/static/admin/js/bootstrap.min.js"></script>
+<script src="/public/static/admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/public/static/admin/js/plugins/ladda/spin.min.js"></script>
+<script src="/public/static/admin/js/plugins/ladda/ladda.min.js"></script>
+<script src="/public/static/admin/js/plugins/ladda/ladda.jquery.min.js"></script>
+<script src="/public/static/admin/js/plugins/toastr/toastr.min.js"></script>
+<script>
+    $(function () {
+        function validate() {
+            return $("#form").validate({
+                rules: {
+                    user_name: {
+                        required: true,
+                    },
+                    password: {
+                        required: true,
+                    },
+                },
+                errorPlacement: function (error, element) {
+                },
+                showErrors: function (errorMap, errorList) {
+                    if (errorList.length > 0) {
+                        toastr.remove();
+                        toastr.error('请输入用户名密码');
+                    }
+                    this.defaultShowErrors();
+                }
+            }).form();
+        }
+
+        $("input[name='user_name']").focus();
+
+        $("input[name='user_name']").keydown(function (e) {
+            if ($(this).val() != '' && e.which == 13) {
+                $("input[name='password']").focus();
+            }
+        });
+        $("input[name='password']").keydown(function (e) {
+            if ($(this).val() != '' && e.which == 13) {
+                $("#submit").click();
+            }
+        });
+        $("#submit").click(function () {
+            if (validate()) {
+                var load_btn = Ladda.create(this);
+                load_btn.start();
+                var data = $('#form').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: "",
+                    data: data,
+                    success: function (data) {
+                        if (data.status == 0) {
+                            load_btn.stop();
+                            toastr.remove();
+                            toastr.error(data.message);
+                        } else {
+                            toastr.remove();
+                            toastr.success('登录成功');
+                            setTimeout(function () {
+                                window.location.href = '../' + data.url + '/index.html';
+                            }, 700);
+                        }
+                    },
+                    error: function () {
+                        load_btn.stop();
+                        toastr.remove();
+                        toastr.error('Error Occurred');
+                    }
+                }).always(function () {
+                });
+            }
+        });
+    });
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)http://www.qtwb2b.com/sell/show.php?itemid=1855659 -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>{$model.name}</title>
+    <meta name="keywords" content="{$model.name}">
+    <meta name="description" content="{$model.name}">
+    <link rel="stylesheet" href="/public/static/product/style.css">
+    <link rel="stylesheet" href="/public/static/product/lrtk.css">
+    <link rel="stylesheet" href="/public/static/product/buttons.css">
+    <script type="text/javascript" src="/public/static/product/jquery.min.js"></script>
+    <script type="text/javascript" src="/public/static/product/koala.min.1.5.js"></script>
+    <script type="text/javascript">window.onerror = function () {
+        return true;
+    }</script>
+</head>
+<body style="">
+
+<div class="heard">
+    <div class="main">
+        <div class="clearfix"></div>
+        <div class="logo">
+            <a href="#">
+                <img style=" width: 370px;display: block;margin-top: 10px; "
+                     src="/public/static/product/logo.jpg"> </a>
+        </div>
+        <div class="searchbody">
+            <form class="navbar-form" role="search" method="get"
+                  onsubmit="return false;">
+                <div class="search">
+                    <ul class="clearfix">
+                        <li class="Themetxthover Themefont search1" placeholder="找产品，请输入产品名称"
+                            data-role="/sell/search.php"></li>
+                        <!--选中-->
+
+                    </ul>
+                    <div class="searchInput">
+                        <input type="text" class="fl searchText" placeholder="找产品，请输入产品名称" name="kw" value="">
+                        <div onclick="formsubmit()" class="btnInput" style="cursor:pointer;">搜 索</div>&nbsp;
+
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <div class="clearfix"></div>
+</div>
+<style>
+    body {
+        font-size: 13px;
+    }
+
+    .boxfff {
+        background: #fff;
+        padding: 10px;
+    }
+
+    .boxfff td {
+        font-size: 14px;
+        line-height: 29px;
+    }
+
+    .min-banner {
+        background: #fafafa;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-top: 2px solid #00a0e9;
+    }
+
+    .mt_20 {
+        margin-top: 20px;
+    }
+
+    .fl-left {
+        float: left
+    }
+
+    .fl-right {
+        float: right
+    }
+
+    .warn_wrap {
+        width: 1200px;
+        border: 1px solid #e6e6e6;
+        overflow: hidden;
+    }
+
+    .warn_ico {
+        border: 1px #fff solid;
+        padding: 4px 0 8px 65px;
+        background: #fefefe;
+        overflow: hidden;
+    }
+
+    .warn_ico {
+        padding: 10px 10px 30px 40px;
+        position: relative;
+    }
+
+    .warn-pic {
+        width: 69px;
+        height: 69px;
+        background: url(images/sm_an.png) no-repeat;
+        position: absolute;
+        left: 80px;
+        top: 50%;
+        margin-top: -34px;
+        float: left;
+    }
+
+    .warn_ico .fl-right dd {
+        width: 100%;
+        color: #888888;
+    }
+
+    .warn_ico .fl-right dl {
+        font-size: 14px;
+        line-height: 25px
+    }
+
+    .warn_ico .fl-right dl dt {
+        color: #e60000;
+    }
+
+    .warn_ico .fl-right {
+        width: 100%;
+    }
+
+    .fl-clr {
+        zoom: 1;
+    }
+
+    .warn_ico .fl-right dt, .warn_ico .fl-right dd {
+        float: left;
+        margin-top: 3px;
+    }
+
+    .warn_ico .fl-right dt {
+        color: #0084c5;
+        width: 79px;
+        padding-right: 3px;
+        text-align: right;
+    }
+
+    .arrleft {
+        width: 890px;
+        height: 382px;
+        overflow: hidden;
+    }
+
+    .arrleft ul {
+        width: 890px;
+        height: 315px;
+    }
+
+    .concat {
+        BORDER: 1PX SOLID #DCDCDC;
+        CLEAR: both;
+        PADDING: 10PX;
+        MARGIN-TOP: 20PX;
+        BACKGROUND: #ffffff;
+        TOP: 20PX;
+        color: #1b9af7;
+        display: none;
+        width: 129px;
+        margin-left: 208px;
+    }
+
+    .sellinfo {
+        margin-top: 34px;
+        color: #3999;
+        height: 50px;
+    }
+
+    .button-large {
+
+        padding: 19px;
+        line-height: 14px;
+    }
+
+    .personal_tops {
+
+        border: 3px solid #2196F3;
+        left: 50%;
+        margin-left: -594px;
+        position: fixed;
+        top: 0;
+        width: 251px;
+        z-index: 20;
+        box-shadow: #dbdbdb 0 0 15px;
+        background: #ffffff;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .sellinfo p {
+        float: left;
+        margin-right: 27px;
+        color: #999 !important;
+    }
+
+    .concat span {
+        MARGIN-right: 20PX;
+    }
+
+    .thumb {
+        padding: 5px 0 5px 0;
+    }
+
+    #contact a:link {
+        color: #333;
+    }
+
+    .contact_body li:last-child {
+        border-bottom: 0px;
+    }
+
+    .thumb img {
+        border: #D0D0D0 1px solid;
+        padding: 3px;
+    }
+
+    .thumb li {
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+    }
+
+    .thumbml ul {
+        margin: 10px 0 15px 0;
+    }
+
+    .imb img {
+        border: #DDDDDD 1px solid;
+        padding: 3px;
+    }
+
+    .boxtype svg {
+        margin-bottom: -2px;
+        margin-left: 20px;
+        margin-right: 2px;
+    }
+
+    #mid_pos {
+        position: absolute;
+    }
+
+    #mid_div {
+        width: 400px;
+        height: 400px;
+        cursor: crosshair;
+        padding: 5px;
+
+        background: #ffffff;
+    }
+
+    #zoomer {
+        border: #333333 1px solid;
+        width: 50px;
+        height: 50px;
+        background: #FFFFFF;
+        position: absolute;
+        opacity: 0.5;
+        filter: alpha(opacity=50);
+    }
+
+    #big_div {
+        width: 350px;
+        height: 390px;
+        border: #CCCCCC 1px solid;
+        background: #FFFFFF;
+        position: absolute;
+        overflow: hidden;
+    }
+
+    #big_pic {
+        position: absolute;
+    }
+
+    li.f_b.t_c {
+        text-align: center;
+    }
+
+    .ab_im {
+        padding: 2px;
+        margin: 10px 0 10px 13px;
+    }
+
+    .ab_on {
+        padding: 1px;
+        margin: 10px 0 10px 13px;
+        border: #0d74a2 1px solid;
+        background: #0d74a2;
+    }
+
+    .adword table {
+        background: url('image/adword_bg.gif') repeat-x 0 bottom;
+    }
+
+    .adword_tip {
+        color: #FF1100;
+        border-bottom: #DDDDDD 1px solid;
+        padding: 8px 10px 8px 28px;
+        background: url('image/arrow_up.gif') no-repeat 10px 8px;
+    }
+
+    .send {
+        float: left;
+
+        width: 200px;
+        height: 65px;
+        margin-top: 20px;
+        line-height: 66px;
+        padding: 0 10px;
+        border-radius: 5px;
+        color: #FFF;
+        font-size: 26px;
+        text-align: center;
+        font-family: "Microsoft YaHei", "Helvetica", "sans-serif";
+        margin-right: 10px;
+        outline: 0;
+        cursor: pointer;
+        background: #00a0e9;
+        border: 1px #21a7e4 solid;
+    }
+
+
+    .send i {
+        MARGIN-RIGHT: 13PX;
+    }
+
+    a.send {
+        color: #fff;
+    }
+
+    .send:hover {
+        color: #FFF;
+    }
+
+    .boxtype p {
+        line-height: 36px;
+        color: #333;
+    }
+
+    .boxtype h1 {
+        font-size: 19px;
+        MARGIN-BOTTOM: 15PX;
+    }
+
+
+    .contact_head {
+        height: 31px;
+        line-height: 31px;
+        border-bottom: 1px solid #DCDCDC;
+
+        padding: 0 10px 0 10px;
+        font-weight: bold;
+        TEXT-ALIGN: CENTER;
+        font-size: 15px;
+    }
+
+    .contact_body {
+        padding: 10px;
+        height: auto;
+        border: 1px solid #00a0e9;
+        margin-bottom: 15px;
+        position: relative;
+        *z-index: 6000;
+        padding-top: 120px;
+        background: url(http://www.qtwb2b.com/file/userbg.png) no-repeat;
+    }
+
+    .contact_body li img {
+        margin-bottom: -7px;
+    }
+
+    .contact_body li {
+        line-height: 21px;
+        padding: 0 0 0 10px;
+        color: #333;
+        margin-bottom: 4px;
+    }
+
+    .contact_body li a:link {
+        color: #333;
+    }
+
+    .contact_body li span {
+        color: #333;
+        font-weight: bold;
+        padding: 0 8px 0 0;
+    }
+
+    .t_c a {
+        font-size: 21px;
+        color: #fff;
+    }
+
+    .showl {
+        width: 866px;
+
+        float: left;
+        background: #FFF;
+        BORDER: 1PX SOLID #f7efef;
+    }
+
+    .showr {
+        width: 310px;
+        background: #FFF;
+        BORDER: 1PX SOLID s #f7efef;
+        float: left;
+
+        margin-right: 10px;
+    }
+
+    .box_head {
+        background: #f7f7f7;
+        LINE-HEIGHT: 45PX;
+        PADDING-LEFT: 20PX;
+        FONT-SIZE: 17PX;
+
+    }
+
+    #content p {
+        line-height: 29px;
+    }
+
+    .box_body {
+        PADDING: 20PX !important;
+    }
+
+    .left_head {
+        line-height: 35px;
+        padding-left: 20px;
+        margin: 16px;
+        margin-bottom: 0px;
+    }
+
+    .linr {
+        border-right: 1px solid #dcdcdc;
+        padding-right: 23px;
+        font-weight: 500;
+        LINE-HEIGHT: 45PX;
+        height: 45px;
+        display: -webkit-inline-box;
+    }
+
+    .comnm {
+
+        BORDER-BOTTOM: 1PX SOLID #DCDCDC;
+        LINE-HEIGHT: 45PX;
+        padding-left: 23px;
+        DISPLAY: -webkit-box;
+        FLOAT: RIGHT;
+        WIDTH: 737PX;
+    }
+
+    .detail-navwarp {
+        height: 48px;
+        margin-bottom: 25px;
+
+        z-index: 3
+    }
+
+    .detail-nav {
+        border-top: 3px solid #00a0e9;
+        height: 44px;
+        BACKGROUND: #f5f4f4;
+        border-bottom: 1px solid #E0E0E0;
+        background-position: 0 44px;
+        background-repeat: repeat-x
+    }
+
+    .detail-nav ul {
+        float: left;
+        height: 44px;
+        border-left: 1px solid #FFF
+    }
+
+    .detail-nav li {
+        float: left;
+        height: 44px;
+        font-size: 14px;
+        color: #3D3D3D;
+        border-right: 1px solid #FFF;
+        cursor: pointer;
+        font-family: Microsoft Yahei
+    }
+
+    .detail-nav li span {
+        display: block;
+        float: left;
+        height: 44px;
+        border-right: 1px solid #E9E9E9;
+        cursor: pointer
+    }
+
+    .detail-nav li i {
+        display: block;
+        float: left;
+        height: 44px;
+        line-height: 44px;
+        padding: 0 30px;
+        font-style: normal;
+        cursor: pointer;
+        position: relative;
+        _margin-bottom: -4px;
+        color: #333;
+    }
+
+    .detail-nav li.current {
+        margin-left: -1px
+    }
+
+    .detail-nav li.current span {
+
+        height: 42px
+    }
+
+    .detail-nav li.current i {
+        padding-left: 31px;
+        background-color: #FFF;
+        height: 46px;
+        line-height: 40px;
+        COLOR: #00a0e9;
+        _line-height: 39px;
+    }
+
+    .box {
+        margin-top: 50px;
+        background: #fff;
+        BORDER: 1PX SOLID #f7efef;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .menu ul li {
+        padding: 0px 40px;
+
+    }
+
+    .list li {
+        width: 260px;
+    }
+
+    table.hovertable {
+        font-family: verdana, arial, sans-serif;
+        font-size: 11px;
+        color: #333333;
+        border-width: 1px;
+        border-color: #999999;
+        border-collapse: collapse;
+    }
+
+    table.hovertable th {
+        background-color: #c3dde0;
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #a9c6c9;
+    }
+
+    table.hovertable tr {
+        background-color: #d4e3e5;
+    }
+
+    table.hovertable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #a9c6c9;
+    }
+
+    .personal_xx .tx_img {
+        background: url(https://www.easyicon.net/api/resizeApi.php?id=1218887&size=48) no-repeat;
+        width: 48px;
+        height: 48px;
+        float: left;
+        margin-right: 13px;
+    }
+
+    .personal_top .t {
+        color: #b2b2b2;
+        float: left;
+        height: 25px;
+        overflow: hidden;
+    }
+
+    .personal_top .t span {
+        font-size: 16px;
+        color: #333;
+        padding-right: 5px;
+        line-height: 16px
+    }
+
+    .personal_top .t a {
+        font-size: 12px;
+        color: #ff7730
+    }
+
+    .personal_bottom {
+        height: 30px;
+        line-height: 30px;
+        font-size: 22px;
+        display: block;
+    }
+
+    .personal_bottom span {
+        padding-right: 10px;
+        height: 28px;
+        line-height: 28px;
+        float: left;
+    }
+
+    .personal_bottom span img {
+        margin-top: 7px
+    }
+
+    .personal_bottom span.e_code {
+        float: left;
+        margin-top: -5px
+    }
+
+    .comlogos {
+        display: none;
+        margin: auto;
+        display: block;
+        max-width: 100%;
+    }
+
+    .comlogo {
+        display: none;
+        margin: auto;
+        display: block;
+        max-width: 100%;
+    }
+
+    .personal_top {
+
+        width: 100%;
+        height: 25px;
+    }
+
+    .button:link {
+        color: #fff !important;
+    }
+
+    /*供应商信息*/
+    .vendor_show {
+        height: 180px;
+        background: #438cd7;
+        position: relative;
+        padding: 45px 30px 45px 300px;
+        color: #fff;
+        font-size: 14px
+    }
+
+    .vendor_show img {
+        width: 270px;
+        height: 270px;
+        position: absolute;
+        left: 0;
+        top: 0
+    }
+
+    .vendor_table {
+        background: #f6f6f6;
+        padding: 20px 30px
+    }
+
+    .vendor_title {
+        line-height: 25px;
+        height: 25px
+    }
+
+    .vendor_title .a {
+        float: right;
+        position: relative;
+        padding-right: 15px
+    }
+
+    .vendor_title .a i {
+        position: absolute;
+        width: 12px;
+        height: 11px;
+        right: 0;
+        top: 50%;
+        margin-top: -5.5px;
+        background: url(images/aa.png) no-repeat
+    }
+
+    .vendor_title .a:hover {
+        text-decoration: underline
+    }
+
+    .vendor_title span {
+        display: inline-block;
+        padding-right: 10px;
+        font-weight: bold;
+        font-size: 18px
+    }
+
+    .vendor_title a {
+        color: #fff
+    }
+
+    .vendor_title .span {
+        height: 20px;
+        width: 75px
+    }
+
+    .vendor_title .vip_an {
+        background-position: 0 4px
+    }
+
+    .vendor_title .pthy_an {
+        background-position: 0 -21px
+    }
+
+    .vendor_title .wzc_an {
+        background-position: 0 -44px
+    }
+
+    .vendor_a {
+        text-align: right;
+        font-size: 14px;
+        padding: 13px 0;
+        line-height: 20px
+    }
+
+    .vendor_a a {
+        color: #696969
+    }
+
+    .vendor_txt {
+        line-height: 25px;
+        height: 75px;
+        margin: 20px 0;
+        overflow: hidden;
+    }
+
+    .vendor_show .more_a {
+        color: #fff;
+        display: block;
+        width: 115px;
+        height: 35px;
+        line-height: 35px;
+        font-size: 14px;
+        text-align: center;
+        border: 1px solid #fff;
+        border-radius: 3px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px
+    }
+
+    .vendor_show .more_a:hover {
+        background: #fff;
+        color: #428dd7
+    }
+
+    .category_lb th {
+        padding: 10px 10px 10px 0;
+        color: #696969;
+        font-weight: normal;
+        width: 105px;
+        color: #696969;
+        vertical-align: top;
+        text-align: right;
+        font-size: 14px;
+        padding-right: 30px;
+    }
+
+    .category_lb td {
+        padding: 10px 10px 10px 0;
+        color: #000;
+        vertical-align: top;
+        font-size: 14px
+    }
+
+    .category_lb td a {
+        color: #000
+    }
+
+    .params-table {
+        line-height: 30px;
+        padding-bottom: 20px
+    }
+
+    .params-table td {
+        line-height: 30px;
+        font-size: 14px;
+        vertical-align: top;
+        width: 32%;
+        overflow: hidden;
+        padding: 0;
+        padding-right: 1%;
+        border: 0
+    }
+
+    .params-table.importattr {
+        border-bottom: 1px solid #e6e6e6;
+        margin-bottom: 10px;
+        padding-bottom: 10px
+    }
+
+    .category_title {
+        height: 20px;
+        margin: 0 30px;
+        font-size: 16px;
+        line-height: 20px;
+        position: relative
+    }
+
+    .category_title i {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        margin-top: -0.5px;
+        width: 100%;
+        height: 1px;
+        background: #e6e6e6
+    }
+
+    .category_title .category_name {
+        font-size: 16px;
+        font-weight: bold;
+        background: #fff;
+        padding: 0 60px 0 0;
+        position: relative;
+        z-index: 11
+    }
+
+    .category_title .category_name em {
+        position: absolute;
+        right: 0;
+        width: 40px;
+        height: 2px;
+        background: #000;
+        top: 50%;
+        margin-top: -1px
+    }
+
+    .category_title .f_r {
+        padding-left: 20px;
+        background: #fff;
+        position: relative;
+    }
+
+    .float_nav {
+        position: fixed;
+        top: 0;
+        width: 933px;
+        z-index: 1000;
+        -webkit-box-shadow: #dbdbdb 0 0 15px;
+        -moz-box-shadow: #dbdbdb 0 0 15px;
+        box-shadow: #dbdbdb 0 0 15px;
+        border-top: 0;
+        padding-top: 0px;
+        padding-left: 266px;
+        margin-left: -266px;
+    }
+
+    .float_nav .nav_box a.hover {
+        margin-top: 0;
+        height: 56px;
+    }
+
+    .product_content h1, .product_content .h1 {
+        font-size: 28px;
+        font-weight: bold;
+        line-height: inherit
+    }
+
+    .product_content h2, .product_content .h2 {
+        font-size: 24px;
+        font-weight: bold;
+        line-height: inherit
+    }
+
+    .product_content h3, .product_content .h3 {
+        font-size: 20px;
+        font-weight: bold;
+        line-height: inherit
+    }
+
+    .product_content h4, .product_content .h4 {
+        font-size: 16px;
+        font-weight: bold;
+        line-height: inherit
+    }
+
+    .product_content h5, .product_content .h5 {
+        font-size: 14px;
+        font-weight: bold;
+        line-height: inherit
+    }
+
+    .product_content h6, .product_content .h6 {
+        font-size: 12px:;
+        font-weight: bold;
+        line-height: inherit
+    }
+
+    .product_nav .product_links {
+        float: right;
+        padding-top: 13px;
+        display: none
+    }
+
+    .product_nav .product_links a {
+        width: 120px;
+        height: 30px;
+        margin: 0 10px;
+        line-height: 30px;
+        float: left;
+    }
+
+    .float_nav .product_links {
+        display: block
+    }
+
+    .vendor_a {
+        text-align: right;
+        font-size: 14px;
+        padding: 13px 0;
+        line-height: 20px
+    }
+
+    .vendor_a a {
+        color: #696969
+    }
+
+    .vendor_txt {
+        text-indent: 26px;
+        padding-bottom: 20px
+    }
+
+    .vendor_txt a {
+        color: #696969
+    }
+
+    .category_an { /* padding:35px 20px 60px 20px; */
+        font-size: 14px;
+        line-height: 2;
+        overflow: hidden;
+    }
+
+    .category_an p {
+        line-height: 1.8
+    }
+
+    .category_an .name_a {
+        position: relative;
+        top: 0px;
+    }
+
+    /*.category_an p, .category_an p span{white-space:pre-wrap !important;word-wrap:break-word}*/
+    .category_an img {
+        max-width: 888px;
+        vertical-align: middle;
+    }
+
+    .content {
+        padding: 10px 0px 10px 0px;
+    }
+
+    #comment_main {
+        padding-top: 25px
+    }
+
+    /*联系方式*/
+    .contact_left {
+        width: 340px;
+        float: left;
+        border: 1px solid #e6e6e6;
+        background: #fff;
+    }
+
+    .contact_left td {
+        border: 0;
+        font-size: 14px
+    }
+
+    .contact_right {
+        float: right;
+        width: 484px;
+    }
+
+    .contact_left .personal_xx {
+        padding: 40px 0 40px 20px;
+        border: 0;
+        background: #fff;
+    }
+
+    .contact_left .personal_xx .tx_img {
+        left: 0;
+        top: -5px;
+    }
+
+    .contact_left .personal_xx .tx_img_large {
+        width: 64px;
+        height: 64px;
+        position: absolute;
+        left: 20px;
+        top: 30px;
+        border: 1px solid #ededed;
+    }
+
+    .contact_left .personal_xx .tx_img_large img {
+        width: 64px;
+        height: 64px;
+    }
+
+    .contact_left .personal_xx i.xx_ico {
+        position: absolute;
+        left: 38px;
+        bottom: 0;
+        width: 32px;
+        height: 16px;
+        background: url(images/sell/pic5.png) no-repeat;
+    }
+
+    .contact_dl {
+        line-height: 28px;
+        background: #428dd7;
+        color: #fff;
+        padding: 20px;
+    }
+
+    .contact_dl dt {
+        font-size: 16px;
+        margin-bottom: 10px
+    }
+
+    .contact_dl dd .s {
+        color: #e6e6e6;
+        margin: 0 3px;
+    }
+
+    .contact_dl .span {
+        height: 20px;
+        width: 75px;
+        display: inline-block;
+        vertical-align: text-bottom;
+    }
+
+    .contact_dl .vip_an {
+        background-position: 0 4px
+    }
+
+    .contact_dl .pthy_an {
+        background-position: 0 -20px
+    }
+
+    .contact_dl dt a, .contact_dl dd a {
+        color: #fff;
+    }
+</style>
+
+
+<div class="m">
+    <div class="left_box">
+        <div class="boxfff">
+            <table width="100%">
+                <tbody>
+                <tr>
+                    <td valign="top" style="border:0px">
+                        <div class="boxfff" style="padding: 0px;">
+                            <table width="100%">
+                                <tbody>
+                                <tr>
+                                    <td width="400" valign="top" style="padding: 0px;">
+                                        <div id="mid_pos"></div>
+                                        <div id="mid_div" onmouseover="SAlbum();" onmouseout="HAlbum();"
+                                             onclick="PAlbum(Dd(&#39;mid_pic&#39;));">
+                                            <img src="{$model.image}" width="400"
+                                                 height="400" id="mid_pic">
+                                        </div>
+                                        <div class="b5"></div>
+                                        <div>
+                                            <img src="{$model.image}" width="60"
+                                                 height="60"
+                                                 onmouseover="if(this.src.indexOf(&#39;nopic60.gif&#39;)==-1)Album(0, &#39;{$model.image}&#39;);"
+                                                 class="ab_on" id="t_0">
+                                            <img
+                                                    src="{$model.image2}" width="60"
+                                                    height="60"
+                                                    onmouseover="if(this.src.indexOf(&#39;nopic60.gif&#39;)==-1)Album(1, &#39;{$model.image2}.middle.jpg&#39;);"
+                                                    class="ab_im" id="t_1"></div>
+                                        <div class="b5"></div>
+
+                                    </td>
+                                    <td width="15"></td>
+                                    <td valign="top">
+                                        <div class="fr">
+                                            <li class="f_orange"
+                                                style="padding:5px 0 0 12px; text-align: center;margin-bottom: 30px;">
+                                                <img src="/public/static/product/vips.png"
+                                                     align="absmiddle"></li>
+                                        </div>
+                                        <div class="b10">&nbsp;</div>
+                                        <div class="boxtype">
+                                            <p>
+                                                <span></span></p>
+                                            <h1 class="title_pade" id="title">{$model.name}</h1>
+                                            <p></p>
+                                            <div class="min-banner">
+                                                <p>
+                                                    <span class="f_dblue">单价：</span>
+                                                    <span class="f_b f_orange"
+                                                          style=" color: #FF9800; font-size: 19px; ">{$model.price}</span>
+                                                </p>
+                                                <p>
+                                                    <span class="f_dblue">服务：</span>
+                                                    <span class="f_b f_orange">
+                                                        <svg t="1610445533864" class="icon" viewBox="0 0 1024 1024"
+                                                             version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                             p-id="2557" width="16" height="16">
+                                                            <path d="M449.223 678.435a32.125 32.125 0 0 1-22.654-9.343L283.48 525.876a31.997 31.997 0 0 1 45.243-45.244l143.09 143.153a31.997 31.997 0 0 1-22.59 54.65z"
+                                                                  p-id="2558" fill="#f43352"></path><path
+                                                                d="M449.223 678.435a31.997 31.997 0 0 1-22.654-54.586l268.772-268.771a31.997 31.997 0 0 1 45.243 45.243L471.812 669.092a32.125 32.125 0 0 1-22.59 9.343z"
+                                                                p-id="2559" fill="#f43352"></path><path
+                                                                d="M511.936 1023.999a32.06 32.06 0 0 1-5.951-63.482c176.813-33.596 376.024-252.453 390.166-385.239l-0.192-360.153C687.085 187.288 502.273 64.357 494.146 58.917A31.997 31.997 0 0 1 529.79 5.803c1.984 1.344 197.163 130.866 400.982 148.784a31.997 31.997 0 0 1 29.18 31.869V578.67c-18.622 177.133-249.83 408.085-441.937 444.689a33.276 33.276 0 0 1-6.079 0.64z"
+                                                                p-id="2560" fill="#f43352"></path><path
+                                                                d="M512.064 1023.743a33.916 33.916 0 0 1-6.08-0.64C313.878 986.627 82.67 755.483 64.177 581.678L64.048 186.2c0-16.638 12.67-30.461 29.18-31.869C297.495 136.35 492.162 6.827 494.146 5.483a32.06 32.06 0 0 1 35.708 53.178c-8.127 5.44-192.94 128.307-401.813 156.144v363.481c13.95 129.458 213.161 348.315 389.974 381.975a32.06 32.06 0 0 1-5.951 63.482z"
+                                                                p-id="2561" fill="#f43352"></path></svg>资质已核查 <svg
+                                                            t="1610445533864" class="icon" viewBox="0 0 1024 1024"
+                                                            version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2557"
+                                                            width="16" height="16"><path
+                                                            d="M449.223 678.435a32.125 32.125 0 0 1-22.654-9.343L283.48 525.876a31.997 31.997 0 0 1 45.243-45.244l143.09 143.153a31.997 31.997 0 0 1-22.59 54.65z"
+                                                            p-id="2558" fill="#f43352"></path><path
+                                                            d="M449.223 678.435a31.997 31.997 0 0 1-22.654-54.586l268.772-268.771a31.997 31.997 0 0 1 45.243 45.243L471.812 669.092a32.125 32.125 0 0 1-22.59 9.343z"
+                                                            p-id="2559" fill="#f43352"></path><path
+                                                            d="M511.936 1023.999a32.06 32.06 0 0 1-5.951-63.482c176.813-33.596 376.024-252.453 390.166-385.239l-0.192-360.153C687.085 187.288 502.273 64.357 494.146 58.917A31.997 31.997 0 0 1 529.79 5.803c1.984 1.344 197.163 130.866 400.982 148.784a31.997 31.997 0 0 1 29.18 31.869V578.67c-18.622 177.133-249.83 408.085-441.937 444.689a33.276 33.276 0 0 1-6.079 0.64z"
+                                                            p-id="2560" fill="#f43352"></path><path
+                                                            d="M512.064 1023.743a33.916 33.916 0 0 1-6.08-0.64C313.878 986.627 82.67 755.483 64.177 581.678L64.048 186.2c0-16.638 12.67-30.461 29.18-31.869C297.495 136.35 492.162 6.827 494.146 5.483a32.06 32.06 0 0 1 35.708 53.178c-8.127 5.44-192.94 128.307-401.813 156.144v363.481c13.95 129.458 213.161 348.315 389.974 381.975a32.06 32.06 0 0 1-5.951 63.482z"
+                                                            p-id="2561" fill="#f43352"></path></svg> 已通过真实性核验  <svg
+                                                            t="1610445533864" class="icon" viewBox="0 0 1024 1024"
+                                                            version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2557"
+                                                            width="16" height="16"><path
+                                                            d="M449.223 678.435a32.125 32.125 0 0 1-22.654-9.343L283.48 525.876a31.997 31.997 0 0 1 45.243-45.244l143.09 143.153a31.997 31.997 0 0 1-22.59 54.65z"
+                                                            p-id="2558" fill="#f43352"></path><path
+                                                            d="M449.223 678.435a31.997 31.997 0 0 1-22.654-54.586l268.772-268.771a31.997 31.997 0 0 1 45.243 45.243L471.812 669.092a32.125 32.125 0 0 1-22.59 9.343z"
+                                                            p-id="2559" fill="#f43352"></path><path
+                                                            d="M511.936 1023.999a32.06 32.06 0 0 1-5.951-63.482c176.813-33.596 376.024-252.453 390.166-385.239l-0.192-360.153C687.085 187.288 502.273 64.357 494.146 58.917A31.997 31.997 0 0 1 529.79 5.803c1.984 1.344 197.163 130.866 400.982 148.784a31.997 31.997 0 0 1 29.18 31.869V578.67c-18.622 177.133-249.83 408.085-441.937 444.689a33.276 33.276 0 0 1-6.079 0.64z"
+                                                            p-id="2560" fill="#f43352"></path><path
+                                                            d="M512.064 1023.743a33.916 33.916 0 0 1-6.08-0.64C313.878 986.627 82.67 755.483 64.177 581.678L64.048 186.2c0-16.638 12.67-30.461 29.18-31.869C297.495 136.35 492.162 6.827 494.146 5.483a32.06 32.06 0 0 1 35.708 53.178c-8.127 5.44-192.94 128.307-401.813 156.144v363.481c13.95 129.458 213.161 348.315 389.974 381.975a32.06 32.06 0 0 1-5.951 63.482z"
+                                                            p-id="2561" fill="#f43352"></path></svg>已通过实地验厂核验</span>
+                                                </p>
+                                                <p>
+                                                    <span class="f_dblue">主营产品：</span>
+                                                    <span class="f_b f_orange">
+             {$model.names}</span>
+                                                </p>
+                                            </div>
+                                            <div class="sellinfo">
+                                                <p>
+                                                    <span class="f_dblue">供货总量：</span>
+                                                    <span class="f_b f_orange">999 </span>
+                                                </p>
+                                                <p>
+                                                    <span class="f_dblue">发货期限：</span>
+                                                    <span>自买家付款之日起  <span class="f_b f_orange">3</span> 天内发货</span>
+                                                </p>
+
+                                                <p>
+                                                    <span class="f_dblue">有效期至：</span>
+                                                    <span>长期有效</span>
+                                                </p>
+                                            </div>
+
+
+                                            <a alt="send" class="button button-primary button-rounded button-large zxzx"
+                                               id="concat"><i class="fa fa-send-o" aria-hidden="true"></i>在线咨询</a>
+                                            <a alt="send" class="button button-royal button-rounded button-large yjhb"
+                                               id="concat"><i class="fa fa-send-o" aria-hidden="true"></i>一键回拨</a>
+
+                                        </div>
+                                        <div style="CLEAR: both;"></div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="b10">&nbsp;</div>
+<div class="m">
+    <div class="showr">
+        <div class="boxfff" style=" padding-top: 0px;  padding: 0px;">
+        </div>
+        <br><br>
+        <div style="  text-align:center"><img src="/public/static/product/rx.jpg"></div>
+        <ul class="list " style="padding:10px;">
+            <volist name="list" id="item"  >
+                <li>
+                    <a href="/product/index?id={$item.id}" target="_blank"><img
+                            src="{$item.image}" width="258" height="258"
+                            alt="{$item.name}"></a>
+                    <p class="px_price"><span class="f_red"><strong>{$item.price}</strong></span><br>
+
+                    </p>
+                    <div class="clearfix"></div>
+                    <a href="/product/index?id={$item.id}" target="_blank"><h5
+                            class="px_title"><span
+                            style="color:#008000">{$item.name}</span></h5></a>
+                    <br>
+                </li>
+            </volist>
+        </ul>
+        <div id="adleft">
+        </div>
+    </div>
+    <div class="showl">
+        <br><br>
+        <img src="/public/static/product/zy.jpg"><br><br>
+        <div class="list arrleft" style="padding:10px;">
+            <ul style="margin-left: 0px;">
+                <volist name="product_list" id="item"  >
+                    <li>
+                        <a href="/product/index?id={$item.id}" target="_blank"><img
+                                src="{$item.image}" width="258" height="258"
+                                alt="{$item.name}"></a>
+                        <p class="px_price"><span class="f_red"><strong>{$item.price}</strong></span><br>
+
+                        </p>
+                        <div class="clearfix"></div>
+                        <a href="/product/index?id={$item.id}" target="_blank"><h5
+                                class="px_title"><span
+                                style="color:#008000">{$item.name}</span></h5></a>
+                        <br>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+        <br><br>
+        <img style="
+    border-top: 2px solid #86b8e0;
+    padding-top: 33px;
+" src="/public/static/product/js.jpg">
+        <br><br>
+        <div class="box_body" style="padding:0;">
+            <div class="content c_b" id="content">
+
+             {$model.description}
+            </div>
+
+
+            <div id="commentm"></div>
+        </div>
+    </div>
+    <div class="b10">&nbsp;</div>
+    <div class="b10">&nbsp;</div>
+    <div class="warn_ico fl-clr">
+        <div class="b10">&nbsp;</div>
+        <div class="warn-detail-rig fl-right fl-clr">
+            <dl class="fl-clr">
+                <dt>免责声明：</dt>
+                <dd>当前页为展会信息展示，该页所展示的展会、报价等相关信息均有企业自行提供，价格真实性、准确性、合法性由店铺所有企业完全负责。微采服-企腾网对此不承担任何保证责任。</dd>
+            </dl>
+            <dl class="fl-clr">
+                <dt>友情提醒：</dt>
+                <dd>建议您通过拨打厂家联系方式确认最终价格，并索要样品确认产品质量。如报价过低，可能为虚假信息，请确认报价真实性，谨防上当受骗。</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+
+<script>
+
+    window.onscroll = function () {
+        //为了保证兼容性，这里取两个值，哪个有值取哪一个
+        //scrollTop就是触发滚轮事件时滚轮的高度
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        console.log("滚动距离" + scrollTop);
+        if (scrollTop > 2866) {
+            $("#adleft").css({"position": 'fixed', "top": '0', "z-index": '999'})
+        } else {
+            $("#adleft").removeAttr("style", "");
+        }
+        if (scrollTop > 600) {
+            $(".butsell").css({
+                "position": 'fixed',
+                "top": '0',
+                "background": '#fff',
+                "width": '100%',
+                "left": '0',
+                "text-align": 'center',
+                "z-index": '998'
+            })
+            $(".concat").css({"position": 'fixed', "top": '70', "z-index": '998', "margin-left": '-10px'})
+        } else {
+            $(".butsell").removeAttr("style", "");
+            $(".concat").removeAttr("style", "");
+        }
+    }
+    $("#open").click(function () {
+        myWindow = window.open("inquiry.php?itemid=1855659", '', 'width=750,height=550,left=400', 'top=200', 'location=NO', 'scrollbars=0');
+    })
+    $(".dhhb").click(function () {
+        $(".kfboxs").show();
+    })
+
+    $(".yjhb").click(function () {
+        $(".kfboxs").show();
+    })
+
+
+    function scroll() {
+        $(".arrleft ul").animate({"margin-left": "-275px"}, function () {
+            $(".arrleft ul li:eq(0)").appendTo($(".arrleft ul"))
+            $(".arrleft ul").css({"margin-left": 0})
+        })
+    }
+
+    setInterval(scroll, 2000);
+
+    setTimeout(function () {
+        $(".kfboxs").show();
+    }, 4000);
+    $(".zxzx").click(function () {
+
+        if (feedbackHOnOff) {
+            $(".feedback").animate({height: 350}, 600)
+            $(".feedback .closeBtn").show();
+            feedbackHOnOff = false;
+        }
+    })
+</script>
+
+<style>
+
+    .feedback {
+        width: 340px;
+        position: fixed;
+        right: 30px;
+        bottom: -9999px;
+        box-shadow: 0 20px 40px 8px rgba(0, 0, 0, 0.25);
+        font-size: 14px;
+        border-radius: 10px 10px 0 0;
+        background: #fff;
+    }
+
+    .feedback .feedbackHeader {
+        height: 40px;
+        line-height: 40px;
+        border-radius: 10px 10px 0 0;
+        color: #ffffff;
+        text-indent: 50px;
+        font-weight: normal;
+        cursor: pointer;
+    }
+
+    .feedback .eMailIco {
+        background: url("/skin/qiteng/images/emailIco.png") 16px center no-repeat #2d4ec1;
+        background-size: 21px auto;
+    }
+
+    .feedbackForm {
+        padding: 16px 16px 40px 16px;
+    }
+
+    .feedbackForm .tips {
+        color: #222d38;
+        padding-bottom: 20px;
+    }
+
+    .feedbackForm .line {
+        margin-bottom: 16px;
+    }
+
+    .feedbackForm .line input, .feedbackForm .line textarea {
+        width: 100%;
+        box-sizing: border-box;
+        box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        border: solid 1px #ccc;
+        color: #222d38;
+        display: block;
+    }
+
+    .feedbackForm textarea {
+        resize: none;
+        height: 78px;
+        padding: 11px;
+        line-height: 20px;
+    }
+
+    .feedbackForm .line input {
+        height: 40px;
+        line-height: 40px;
+        padding: 0 11px;
+    }
+
+    .feedbackForm .btn {
+        background: #18c139;
+        border-radius: 4px;
+        width: 100%;
+        box-sizing: border-box;
+        border: none;
+        height: 40px;
+        line-height: 40px;
+        color: #ffffff;
+        cursor: pointer;
+    }
+
+    .feedback .closeBtn {
+        background: url("/skin/qiteng/images/closeBtn.png") no-repeat;
+        width: 28px;
+        height: 28px;
+        background-size: 28px 28px;
+        position: absolute;
+        left: -36px;
+        top: 6px;
+        cursor: pointer;
+        display: none;
+    }
+
+    .rigkf {
+        margin-left: 112px;
+    }
+
+    .clos {
+        width: 30PX;
+        height: 30PX;
+        cursor: pointer;
+        float: right;
+        MARGIN-TOP: -20PX;
+        margin-right: -23px;
+    }
+
+    .kfboxs {
+        padding: 30px;
+        background: #fff;
+        position: fixed;
+        right: 50%;
+        margin-right: -250px;
+        top: 35%;
+        text-align: center;
+        width: 500px;
+        line-height: 20PX;
+        height: 200px;
+        z-index: 999;
+        display: none;
+        FONT-SIZE: 14PX;
+        -webkit-box-shadow: 0 1px 10px 0 rgba(0, 0, 0, .3);
+        box-shadow: 0 1px 10px 0 rgba(0, 0, 0, .3);
+        -webkit-transition: all .5s ease;
+        -moz-transition: all .5s ease;
+        transition: all .5s ease;
+    }
+
+    .btn.btn-default {
+        background: #0083fe;
+        color: #fff;
+        width: 100%;
+        margin: auto;
+        display: block;
+    }
+
+    .kfboxs h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+</style>
+
+﻿
+<div class="clearfix"></div>
+<div class="allfooter">
+    <div class="footerBottom">
+        <div class="conBox">
+            <div class="topBox clearfix">
+                <ul class="first">
+                    <img class="f-logo" src="">
+                </ul>
+                <ul class="second">
+                    <li>
+                        <div class="txt">新手指南</div>
+                    </li>
+
+                </ul>
+                <ul class="third">
+                    <li>
+                        <div class="txt">企业服务</div>
+                    </li>
+
+                </ul>
+                <ul>
+                    <li>
+                        <div class="txt">关于我们</div>
+                    </li>
+                </ul>
+                <div class="fourth fl">
+                    <ul>
+                        <li>
+                            <div class="txt">手机登录</div>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="bottomBox text-center">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

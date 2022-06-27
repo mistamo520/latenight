@@ -1,0 +1,99 @@
+<div class='modal-header'>
+    {$edit_state? '修改快排关键词' : '新增快排关键词'}
+</div>
+<div class='modal-body '>
+    <form class='' role='form' id='form'>
+        <input type='hidden' name='id' value='{$model.id|default=""}' />
+        <div class='row'>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>客户</label>
+                    <p><html:select id='user_id' name='user_id' data='user_list' class='form-control' selected='model["user_id"]' first='请选择'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>域名</label>
+                    <p><input type='text' class='form-control' id='domain' name='domain' value='{$model.domain|default=""}' autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>关键词</label>
+                    <p><input type='text' class='form-control' id='keyword' name='keyword' value='{$model.keyword|default=""}' autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>客户单价</label>
+                    <p><input type='text' class='form-control' id='price_client' name='price_client' value='{$model.price_client|default=""}' autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>代理单价</label>
+                    <p><input type='text' class='form-control' id='price_agent' name='price_agent' value='{$model.price_agent|default=""}' autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>初排</label>
+                    <p><input type='text' class='form-control' id='rank_create' name='rank_create' value='{$model.rank_create|default=""}' autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>今排</label>
+                    <p><input type='text' class='form-control' id='rank_current' name='rank_current' value='{$model.rank_current|default=""}' autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>左排</label>
+                    <p><input type='text' class='form-control' id='rank_last' name='rank_last' value='{$model.rank_last|default=""}' autocomplete='off'/></p>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class='modal-footer'>
+    <button type='button' class='btn btn-default' data-dismiss='modal'>取消</button>
+    <button type='button' class='btn btn-primary' data-style='zoom-in' id='submit'>提交</button>
+</div>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+        function validate(){
+            return $('#form').validate({
+                rules: {
+                    key: {
+                        required: true,
+                    }
+                },
+            }).form();
+        }
+        $('#submit').click(function () {
+            if (validate()) {
+                var load_btn = Ladda.create(this);
+                load_btn.start();
+                var data = $('#form').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: 'save',
+                    data: data,
+                    success: function (data) {
+                        if (check_status(data)){
+                            $('#modal-sm').modal('hide');
+                            data_table.draw();
+                        }
+                    },
+                    error: function () {
+                        toastr['error']('Error Occurred');
+                    }
+                }).always(function () {
+                    load_btn.stop();
+                });
+            }
+        });
+    });
+</script>

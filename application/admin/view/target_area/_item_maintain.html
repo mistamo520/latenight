@@ -1,0 +1,118 @@
+<div class='modal-header'>
+    {$edit_state? '修改投放区域' : '新增投放区域'}
+</div>
+<div class='modal-body '>
+    <form class='' role='form' id='form'>
+        <input type='hidden' id="id" name='id' value='{$model.id|default=""}'/>
+        <div class='row'>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>用户</label>
+                    <p>
+                        <empty name="edit_state">
+                            <html:select id='user_id' name='user_id' data='user_list' class='form-control'
+                                         selected='model["user_id"]'/>
+                            <else/>
+                            <input type="hidden" id="user_id" name="user_id" value="{$model.user_id}">
+                            <span class="form-control">{$model.user.name}</span>
+                        </empty>
+                    </p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <volist name="location_list" id="province" key="i">
+                    <div class='row m-b'>
+                        <div class='col-sm-1 no-padding'>
+                            <label for="">
+                                <empty name="province.checked">
+                                    <input type="checkbox" name="province" value="{$province.name}"
+                                           data-key="{$i}">
+                                    <else/>
+                                    <input type="checkbox" checked="checked" value="{$province.name}"
+                                           name="province" data-key="{$i}">
+                                </empty>
+                                {$province.name}
+                            </label>
+                        </div>
+                        <div class="col-lg-11 no-padding">
+                            <div class="row">
+                                <volist name="province.city_list" id="city" key="j">
+                                    <div class='col-sm-1 no-padding'>
+                                        <label for="">
+                                            <empty name="city.checked">
+                                                <input type="checkbox" name="city" value="{$city.name}"
+                                                       class="city-{$i}">
+                                                <else/>
+                                                <input type="checkbox" checked="checked" value="{$city.name}"
+                                                       name="city"
+                                                       class="city-{$i}">
+                                            </empty>
+                                            {$city.name}
+                                        </label>
+                                    </div>
+                                </volist>
+                            </div>
+                        </div>
+                    </div>
+                </volist>
+            </div>
+        </div>
+    </form>
+</div>
+<div class='modal-footer'>
+    <button type='button' class='btn btn-default' data-dismiss='modal'>取消</button>
+    <button type='button' class='btn btn-primary' data-style='zoom-in' id='submit'>提交</button>
+</div>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+        $('input[name=province]').change(function () {
+            var key = $(this).data('key');
+            if ($(this).is(':checked')) {
+                $('.city-' + key).attr('checked', true);
+            } else {
+                $('.city-' + key).attr('checked', false);
+            }
+        });
+
+        $('#submit').click(function () {
+            var load_btn = Ladda.create(this);
+            load_btn.start();
+            var province_list = [];
+            var city_list = [];
+            $('input[name=province]').each(function () {
+                if ($(this).is(':checked')) {
+                    province_list.push($(this).val());
+                }
+            });
+            $('input[name=city]').each(function () {
+                if ($(this).is(':checked')) {
+                    city_list.push($(this).val());
+                }
+            });
+
+
+            $.ajax({
+                type: 'POST',
+                url: 'save',
+                data: {
+                    id: $('#id').val(),
+                    user_id: $('#user_id').val(),
+                    province: province_list.join(';'),
+                    city: city_list.join(';'),
+                },
+                success: function (data) {
+                    if (check_status(data)) {
+                        $('#modal-lg').modal('hide');
+                        data_table.draw();
+                    }
+                },
+                error: function () {
+                    toastr['error']('Error Occurred');
+                }
+            }).always(function () {
+                load_btn.stop();
+            });
+        });
+    });
+</script>

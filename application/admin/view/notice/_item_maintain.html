@@ -1,0 +1,68 @@
+<div class='modal-header'>
+    {$edit_state? '修改公告' : '新增公告'}
+</div>
+<div class='modal-body '>
+    <form class='' role='form' id='form'>
+        <input type='hidden' name='id' value='{$model.id|default=""}'/>
+        <div class='row'>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>标题</label>
+                    <p><input type='text' class='form-control' id='title' name='title' value='{$model.title|default=""}'
+                              autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>内容</label>
+                    <p>
+                        <textarea name="content" id="content" rows="20"
+                                  class='form-control'>{$model.content|default=""}</textarea>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class='modal-footer'>
+    <button type='button' class='btn btn-default' data-dismiss='modal'>取消</button>
+    <button type='button' class='btn btn-primary' data-style='zoom-in' id='submit'>提交</button>
+</div>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+        function validate() {
+            return $('#form').validate({
+                rules: {
+                    key: {
+                        required: true,
+                    }
+                },
+            }).form();
+        }
+
+        $('#submit').click(function () {
+            if (validate()) {
+                var load_btn = Ladda.create(this);
+                load_btn.start();
+                var data = $('#form').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: 'save',
+                    data: data,
+                    success: function (data) {
+                        if (check_status(data)) {
+                            $('#modal-md').modal('hide');
+                            data_table.draw();
+                        }
+                    },
+                    error: function () {
+                        toastr['error']('Error Occurred');
+                    }
+                }).always(function () {
+                    load_btn.stop();
+                });
+            }
+        });
+    });
+</script>

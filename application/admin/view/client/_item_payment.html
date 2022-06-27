@@ -1,0 +1,88 @@
+<div class='modal-header'>
+    充值
+</div>
+<div class='modal-body '>
+    <form class='' role='form' id='form'>
+        <input type='hidden' name='id' value='{$model.id|default=""}'/>
+        <div class='row'>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>客户账户</label>
+                    <p><span class="form-control">{$model.user_name}</span></p>
+                </div>
+            </div>
+            <eq name="model.version" value="2">
+                <div class='col-sm-12'>
+                    <div class='form-group'>
+                        <label>充值天数</label>
+                        <p>
+                            <html:select name="days" data='days_list' class="form-control"/>
+                        </p>
+                    </div>
+                </div>
+                <else/>
+                <div class='col-sm-12'>
+                    <div class='form-group'>
+                        <label>充值金额</label>
+                        <p><input type='number' class='form-control' id='amount' name='amount'
+                                  value='0' autocomplete='off'/></p>
+                    </div>
+                </div>
+            </eq>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>备注</label>
+                    <p>
+                        <textarea name="description" id="description" class='form-control' rows="3"></textarea>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class='modal-footer'>
+    <button type='button' class='btn btn-default' data-dismiss='modal'>取消</button>
+    <button type='button' class='btn btn-primary' data-style='zoom-in' id='submit'>提交</button>
+</div>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+        function validate() {
+            return $('#form').validate({
+                rules: {
+                    days: {
+                        required: true
+                    },
+                    amount: {
+                        required: true,
+                        number: true
+                    },
+                },
+            }).form();
+        }
+
+        $('#submit').click(function () {
+            if (validate()) {
+                var load_btn = Ladda.create(this);
+                load_btn.start();
+                var data = $('#form').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: 'save_payment',
+                    data: data,
+                    success: function (data) {
+                        if (check_status(data)) {
+                            $('#modal-sm').modal('hide');
+                            data_table.draw();
+                        }
+                    },
+                    error: function () {
+                        toastr['error']('Error Occurred');
+                    }
+                }).always(function () {
+                    load_btn.stop();
+                });
+            }
+        });
+    });
+</script>

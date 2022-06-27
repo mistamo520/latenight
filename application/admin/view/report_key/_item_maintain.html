@@ -1,0 +1,117 @@
+<div class='modal-header'>
+    {$edit_state? '修改搜索词报告' : '新增搜索词报告'}
+</div>
+<div class='modal-body '>
+    <form class='' role='form' id='form'>
+        <input type='hidden' name='id' value='{$model.id|default=""}' />
+        <div class='row'>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>用户</label>
+                    <p><html:select id='user_id' name='user_id' data='user_list' class='form-control' selected='model["user_id"]' first='请选择'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>搜索词</label>
+                    <p><input type='text' class='form-control' id='name' name='name' value='{$model.name|default=""}' autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>日期</label>
+                    <p><input type='text' class='form-control' id='date' name='date' value='{$model.date|default=""}' autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>推广计划</label>
+                    <p><input type='text' class='form-control' id='plan' name='plan' value='{$model.plan|default=""}' autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>推广单元</label>
+                    <p><input type='text' class='form-control' id='unit' name='unit' value='{$model.unit|default=""}' autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>展现次数</label>
+                    <p><input type='text' class='form-control' id='display_count' name='display_count' value='{$model.display_count|default=""}' autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>点击次数</label>
+                    <p><input type='text' class='form-control' id='click_count' name='click_count' value='{$model.click_count|default=""}' autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>点击率</label>
+                    <p><input type='text' class='form-control' id='click_rate' name='click_rate' value='{$model.click_rate|default=""}' autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>消费金额</label>
+                    <p><input type='text' class='form-control' id='amount' name='amount' value='{$model.amount|default=""}' autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>客户扣费</label>
+                    <p><input type='text' class='form-control' id='amount_client' name='amount_client' value='{$model.amount_client|default=""}' autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>代理扣费</label>
+                    <p><input type='text' class='form-control' id='amount_agent' name='amount_agent' value='{$model.amount_agent|default=""}' autocomplete='off'/></p>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class='modal-footer'>
+    <button type='button' class='btn btn-default' data-dismiss='modal'>取消</button>
+    <button type='button' class='btn btn-primary' data-style='zoom-in' id='submit'>提交</button>
+</div>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+        function validate(){
+            return $('#form').validate({
+                rules: {
+                    key: {
+                        required: true,
+                    }
+                },
+            }).form();
+        }
+        $('#submit').click(function () {
+            if (validate()) {
+                var load_btn = Ladda.create(this);
+                load_btn.start();
+                var data = $('#form').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: 'save',
+                    data: data,
+                    success: function (data) {
+                        if (check_status(data)){
+                            $('#modal-sm').modal('hide');
+                            data_table.draw();
+                        }
+                    },
+                    error: function () {
+                        toastr['error']('Error Occurred');
+                    }
+                }).always(function () {
+                    load_btn.stop();
+                });
+            }
+        });
+    });
+</script>

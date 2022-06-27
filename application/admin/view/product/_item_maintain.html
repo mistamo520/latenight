@@ -1,0 +1,397 @@
+<div class='modal-header'>
+    {$edit_state? '修改商品' : '新增商品'}
+</div>
+<div class='modal-body '>
+    <form class='' role='form' id='form' enctype="multipart/form-data">
+        <input type='hidden' name='id' value='{$model.id|default=""}'/>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <empty name="client_user_id">
+                        <div class='col-sm-6'>
+                            <div class='form-group'>
+                                <label>用户</label>
+                                <p>
+                                    <empty name="edit_state">
+                                        <html:select id='user_id' name='user_id' data='user_list' class='form-control'
+                                                     selected='model["user_id"]'/>
+                                        <else/>
+                                        <input type="hidden" name="user_id" value="{$model.user_id}">
+                                        <span class="form-control">{$model.user.name}</span>
+                                    </empty>
+                                </p>
+                            </div>
+                        </div>
+                        <else/>
+                        <input type="hidden" value="{$client_user_id}" name="user_id">
+                    </empty>
+
+                    <div class='col-sm-6'>
+                        <div class='form-group'>
+                            <label>所属单元</label>
+                            <p>
+                                <html:select id='unit_id' name='unit_id' data='unit_list' class='form-control'
+                                             selected='model["unit_id"]' data-key="name" data-value="id"
+                                             data-parent="user_id"
+                                             first="请选择"/>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class='col-sm-6'>
+                        <div class='form-group'>
+                            <label>商品名称 <span class="text-danger">(必填)</span> </label>
+                            <p><input type='text' class='form-control' id='name' name='name' required
+                                      value='{$model.name|default=""}'
+                                      autocomplete='off'/></p>
+                        </div>
+                    </div>
+                    <div class='col-sm-6'>
+                        <div class='form-group'>
+                            <label>商品品牌</label>
+                            <p><input type='text' class='form-control' id='brand' name='brand'
+                                      value='{$model.brand|default=""}'
+                                      autocomplete='off'/></p>
+                        </div>
+                    </div>
+                    <div class='col-sm-6'>
+                        <div class='form-group'>
+                            <label>商品价格 <span class="text-danger">(必填)</span> </label>
+                            <p><input type='text' class='form-control' id='price' name='price' required
+                                      value='{$model.price|default=""}'
+                                      autocomplete='off'/></p>
+                        </div>
+                    </div>
+                    <div class='col-sm-6'>
+                        <div class='form-group'>
+                            <label>公司名称 <span class="text-danger">(必填)</span> </label>
+                            <p><input type='text' class='form-control' id='company_name' name='company_name' required
+                                      value='{$model.company_name|default=""}' autocomplete='off'/></p>
+                        </div>
+                    </div>
+                    <div class='col-sm-6'>
+                        <div class='form-group'>
+                            <label>公司地点 <span class="text-danger">(必填)</span> </label>
+                            <p><input type='text' class='form-control' id='company_location' name='company_location'
+                                      required
+                                      value='{$model.company_location|default=""}' autocomplete='off'/></p>
+                        </div>
+                    </div>
+                    <div class='col-sm-6'>
+                        <div class='form-group'>
+                            <label>公司统一信用代码 <span class="text-danger">(必填)</span> </label>
+                            <p><input type='text' class='form-control' id='company_code' name='company_code' required
+                                      value='{$model.company_code|default=""}' autocomplete='off'/></p>
+                        </div>
+                    </div>
+                    <div class='col-sm-6'>
+                        <div class='form-group'>
+                            <label>一级类目</label>
+                            <p><input type='text' class='form-control' id='category' name='category'
+                                      value='{$model.category|default=""}' autocomplete='off'/></p>
+                        </div>
+                    </div>
+                    <div class='col-sm-6'>
+                        <div class='form-group'>
+                            <label>二级类目</label>
+                            <p><input type='text' class='form-control' id='sub_category' name='sub_category'
+                                      value='{$model.sub_category|default=""}' autocomplete='off'/></p>
+                        </div>
+                    </div>
+                    <div class='col-sm-6'>
+                        <div class='form-group'>
+                            <label>发货省份</label>
+                            <p><input type='text' class='form-control' id='delivery_province' name='delivery_province'
+                                      value='{$model.delivery_province|default=""}' autocomplete='off'/></p>
+                        </div>
+                    </div>
+                    <div class='col-sm-6'>
+                        <div class='form-group'>
+                            <label>发货城市</label>
+                            <p><input type='text' class='form-control' id='delivery_city' name='delivery_city'
+                                      value='{$model.delivery_city|default=""}' autocomplete='off'/></p>
+                        </div>
+                    </div>
+                    <div class='col-sm-6'>
+                        <div class='form-group'>
+                            <label>货币单位</label>
+                            <p><input type='text' class='form-control' id='price_unit' name='price_unit' readonly
+                                      value='{$model.price_unit|default="RMB"}' autocomplete='off'/></p>
+                        </div>
+                    </div>
+                    <div class='col-sm-6'>
+                        <div class='form-group'>
+                            <label>推广省份</label>
+                            <p><input type='text' class='form-control' id='target_province' name='target_province'
+                                      readonly
+                                      value='{$model.target_province|default=""}' autocomplete='off'/></p>
+                        </div>
+                    </div>
+                    <div class='col-sm-12'>
+                        <div class='form-group'>
+                            <label>推广城市</label>
+                            <p><input type='text' class='form-control' id='target_city' name='target_city' readonly
+                                      value='{$model.target_city|default=""}' autocomplete='off'/></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class='col-sm-12'>
+                        <div class='form-group'>
+                            <label>
+                                商品长方形主图 <span class="text-danger">(必填)</span> <a onclick="$('#picture').click()">点击上传 <i
+                                    class="fa fa-upload"></i>
+                            </a>
+                            </label>
+                            <notempty name="model.image">
+                                <input type="text" value="{$setting['system.website_domain']}{$model.image}"
+                                       class="form-control"/>
+                            </notempty>
+                            <p>
+                                <img id="preview" src="{$model.image|default=''}" width="60%">
+                                <br>
+
+                                建议尺寸 3:2 / 370px*245px / 3MB；请勿包含联系方式和边框；
+                            </p>
+                            <input id="picture" name="picture" type="file" accept="image/*" style="display: none;"
+                                   onchange="document.getElementById('preview').src = window.URL.createObjectURL(document.getElementById('picture').files[0])">
+                            <input type='hidden' class='form-control' name='image'
+                                   value='{$model.image|default=""}' autocomplete='off'/>
+                        </div>
+                    </div>
+                    <div class='col-sm-12'>
+                        <div class='form-group'>
+                            <label>
+                                商品正方形图片 <span class="text-danger">(必填)</span> <a onclick="$('#picture2').click()">点击上传
+                                <i class="fa fa-upload"></i>
+                            </a>
+                            </label>
+                            <notempty name="model.image2">
+                                <input type="text" value="{$setting['system.website_domain']}{$model.image2}"
+                                       class="form-control"/>
+                            </notempty>
+                            <p>
+                                <img id="preview2" src="{$model.image2|default=''}" width="60%">
+                                <br>
+                                建议尺寸 1:1 / 360px*360px / 3MB；请勿包含联系方式和边框；
+                            </p>
+                            <input id="picture2" name="picture2" type="file" accept="image/*" style="display: none;"
+                                   onchange="document.getElementById('preview2').src = window.URL.createObjectURL(document.getElementById('picture2').files[0])">
+                            <input type='hidden' class='form-control' name='image2'
+                                   value='{$model.image2|default=""}' autocomplete='off'/>
+                        </div>
+                    </div>
+                    <notempty name="is_admin">
+                        <div class='col-sm-6'>
+                            <div class='form-group'>
+                                <label>移动端URL</label>
+                                <p><input type='text' class='form-control' id='url_mobile' name='url_mobile'
+                                          value='{$model.url_mobile|default=""}' autocomplete='off'/></p>
+                            </div>
+                        </div>
+                        <div class='col-sm-6'>
+                            <div class='form-group'>
+                                <label>电脑端URL</label>
+                                <p><input type='text' class='form-control' id='url_pc' name='url_pc'
+                                          value='{$model.url_pc|default=""}' autocomplete='off'/></p>
+                            </div>
+                        </div>
+                        <div class='col-sm-6'>
+                            <div class='form-group'>
+                                <label>厂家店铺主页移动端</label>
+                                <p><input type='text' class='form-control' id='home_url_mobile' name='home_url_mobile'
+                                          value='{$model.home_url_mobile|default=""}' autocomplete='off'/></p>
+                            </div>
+                        </div>
+                        <div class='col-sm-6'>
+                            <div class='form-group'>
+                                <label>厂家店铺主页PC端</label>
+                                <p><input type='text' class='form-control' id='home_url_pc' name='home_url_pc'
+                                          value='{$model.home_url_pc|default=""}' autocomplete='off'/></p>
+                            </div>
+                        </div>
+                        <div class='col-sm-6'>
+                            <div class='form-group'>
+                                <label>商品列表移动端</label>
+                                <p><input type='text' class='form-control' id='list_url_mobile' name='list_url_mobile'
+                                          value='{$model.list_url_mobile|default=""}' autocomplete='off'/></p>
+                            </div>
+                        </div>
+                        <div class='col-sm-6'>
+                            <div class='form-group'>
+                                <label>商品列表PC端</label>
+                                <p><input type='text' class='form-control' id='list_url_pc' name='list_url_pc'
+                                          value='{$model.list_url_pc|default=""}' autocomplete='off'/></p>
+                            </div>
+                        </div>
+                        <div class='col-sm-6'>
+                            <div class='form-group'>
+                                <label>广告主站点名称</label>
+                                <p><input type='text' class='form-control' id='seller_name' name='seller_name'
+                                          value='{$model.seller_name|default=""}' autocomplete='off'/></p>
+                            </div>
+                        </div>
+                        <div class='col-sm-6'>
+                            <div class='form-group'>
+                                <label>广告主站点URL</label>
+                                <p><input type='text' class='form-control' id='seller_url' name='seller_url'
+                                          value='{$model.seller_url|default=""}' autocomplete='off'/></p>
+                            </div>
+                        </div>
+                        <else/>
+                        <div class='col-sm-6'>
+                            <div class='form-group'>
+                                <label>移动端URL</label>
+                                <p><input type='text' class='form-control' id='url_mobile' name='url_mobile'
+                                          readonly="readonly" placeholder="系统自动生成"
+                                          value='{$model.url_mobile|default=""}' autocomplete='off'/></p>
+                            </div>
+                        </div>
+                        <div class='col-sm-6'>
+                            <div class='form-group'>
+                                <label>电脑端URL</label>
+                                <p><input type='text' class='form-control' id='url_pc' name='url_pc' readonly="readonly"
+                                          placeholder="系统自动生成"
+                                          value='{$model.url_pc|default=""}' autocomplete='off'/></p>
+                            </div>
+                        </div>
+                        <div class='col-sm-6'>
+                            <div class='form-group'>
+                                <label>厂家店铺主页移动端</label>
+                                <p><input type='text' class='form-control' id='home_url_mobile' name='home_url_mobile'
+                                          readonly="readonly" placeholder="系统自动生成"
+                                          value='{$model.home_url_mobile|default=""}' autocomplete='off'/></p>
+                            </div>
+                        </div>
+                        <div class='col-sm-6'>
+                            <div class='form-group'>
+                                <label>厂家店铺主页PC端</label>
+                                <p><input type='text' class='form-control' id='home_url_pc' name='home_url_pc'
+                                          readonly="readonly" placeholder="系统自动生成"
+                                          value='{$model.home_url_pc|default=""}' autocomplete='off'/></p>
+                            </div>
+                        </div>
+                        <div class='col-sm-6'>
+                            <div class='form-group'>
+                                <label>商品列表移动端</label>
+                                <p><input type='text' class='form-control' id='list_url_mobile' name='list_url_mobile'
+                                          readonly="readonly" placeholder="系统自动生成"
+                                          value='{$model.list_url_mobile|default=""}' autocomplete='off'/></p>
+                            </div>
+                        </div>
+                        <div class='col-sm-6'>
+                            <div class='form-group'>
+                                <label>商品列表PC端</label>
+                                <p><input type='text' class='form-control' id='list_url_pc' name='list_url_pc'
+                                          readonly="readonly" placeholder="系统自动生成"
+                                          value='{$model.list_url_pc|default=""}' autocomplete='off'/></p>
+                            </div>
+                        </div>
+                        <div class='col-sm-6'>
+                            <div class='form-group'>
+                                <label>广告主站点名称</label>
+                                <p><input type='text' class='form-control' id='seller_name' name='seller_name'
+                                          readonly="readonly" placeholder="系统自动生成"
+                                          value='{$model.seller_name|default=""}' autocomplete='off'/></p>
+                            </div>
+                        </div>
+                        <div class='col-sm-6'>
+                            <div class='form-group'>
+                                <label>广告主站点URL</label>
+                                <p><input type='text' class='form-control' id='seller_url' name='seller_url'
+                                          readonly="readonly" placeholder="系统自动生成"
+                                          value='{$model.seller_url|default=""}' autocomplete='off'/></p>
+                            </div>
+                        </div>
+                    </notempty>
+                </div>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>产品介绍</label>
+                    <p>
+                        <textarea name="description" id="description" class="kindeditor"
+                                  rows="10">{$model.description}</textarea>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class='modal-footer'>
+    <button type='button' class='btn btn-default' data-dismiss='modal'>取消</button>
+    <button type='button' class='btn btn-primary' data-style='zoom-in' id='submit'>提交</button>
+</div>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+        KindEditor.create('.kindeditor', {
+            allowFileManager: true,
+            width: '100%',
+            height: '380px',
+            allowFileManager : false,
+            extraFileUploadParams: {
+                sessionid: '<?php echo session_id(); ?>'
+            },
+            items : [
+                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                'insertunorderedlist', '|', 'emoticons', 'image', 'link'],
+            afterBlur: function () {
+                //编辑器失去焦点时直接同步，可以取到值
+                this.sync();
+            }
+        });
+        if ($('#user_id').length > 0) {
+            $("#user_id").change(function () {
+                $('#unit_id').val("");
+                $('#unit_id option').not(':first').addClass('hidden').filter('[data-parent^="' + $('#user_id').val() + '"]').removeClass('hidden');
+            });
+            $('#user_id').change();
+        } else {
+            $('#unit_id option').removeClass('hidden');
+        }
+
+        function validate() {
+            return $('#form').validate({
+                rules: {
+                    user_id: {
+                        required: true,
+                    }
+                },
+            }).form();
+        }
+
+        $('#submit').click(function () {
+            if (validate()) {
+                var load_btn = Ladda.create(this);
+                load_btn.start();
+                var data = new FormData($('#form')[0]);
+                $.ajax({
+                    type: 'POST',
+                    url: 'save',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        if (check_status(data)) {
+                            $('#modal-lg').modal('hide');
+                            data_table.draw();
+                        }
+                    },
+                    error: function () {
+                        toastr['error']('Error Occurred');
+                    }
+                }).always(function () {
+                    load_btn.stop();
+                });
+            }
+        });
+    });
+</script>

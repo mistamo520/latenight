@@ -1,0 +1,13 @@
+<div class='modal-header'>
+    {$model.title}
+</div>
+<div class='modal-body '>
+    <form class='' role='form' id='form'>
+        <input type='hidden' name='id' value='{$model.id|default=""}'/>
+        {$model.content}
+    </form>
+</div>
+<div class='modal-footer'>
+    <button type='button' class='btn btn-default' data-dismiss='modal'>关闭</button>
+</div>
+

@@ -1,0 +1,110 @@
+<div class='modal-header'>
+    {$edit_state? '修改' : '新增'}
+</div>
+<div class='modal-body '>
+    <form class='' role='form' id='form' enctype="multipart/form-data">
+        <input type='hidden' name='id' value='{$model.id|default=""}'/>
+        <div class='row'>
+            <div class='col-sm-9'>
+                <div class='form-group'>
+                    <label>标题</label>
+                    <p><input type='text' class='form-control' id='title' name='title' value='{$model.title|default=""}'
+                              autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-3'>
+                <div class='form-group'>
+                    <label>排序</label>
+                    <p><input type='text' class='form-control' id='display_order' name='display_order'
+                              value='{$model.display_order|default="0"}' autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>链接</label>
+                    <p><input type='text' class='form-control' id='redirect_url' name='redirect_url'
+                              value='{$model.redirect_url|default=""}' autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>描述</label>
+                    <p><input type='text' class='form-control' id='description' name='description'
+                            value='{$model.description|default=""}' autocomplete='off'/></p>
+                </div>
+            </div>
+            <div class='col-sm-12'>
+                <div class='form-group'>
+                    <label>
+                        <a onclick="$('#picture').click()">上传 <i class="fa fa-upload"></i>
+                        </a>
+                    </label>
+                    <p>
+                        <img id="preview" src="{$model.picture_url|default=''}" width="100%">
+                    </p>
+                    <input id="picture" name="picture" type="file" accept="image/*" style="display: none;"
+                           onchange="document.getElementById('preview').src = window.URL.createObjectURL(document.getElementById('picture').files[0])">
+                    <input type='hidden' class='form-control' name='picture_url'
+                           value='{$model.picture_url|default=""}' autocomplete='off'/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class='modal-footer'>
+    <button type='button' class='btn btn-default' data-dismiss='modal'>取消</button>
+    <button type='button' class='btn btn-primary' data-style='zoom-in' id='submit'>提交</button>
+</div>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+        function validate() {
+            return $('#form').validate({
+                rules: {
+                    title: {
+                        required: true,
+                    },
+                    display_order: {
+                        required: true,
+                        digits: true,
+                    },
+                    redirect_url: {
+                        url:true
+                    },
+                    description: {
+                        required: true,
+                    },
+                    picture: {
+                        required: true,
+                    },
+                },
+            }).form();
+        }
+
+        $('#submit').click(function () {
+            if (validate()) {
+                var load_btn = Ladda.create(this);
+                load_btn.start();
+                var data = new FormData($('#form')[0]);//$('#form').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: 'save',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        if (check_status(data)) {
+                            $('#modal-md').modal('hide');
+                            data_table.draw();
+                        }
+                    },
+                    error: function () {
+                        toastr['error']('Error Occurred');
+                    }
+                }).always(function () {
+                    load_btn.stop();
+                });
+            }
+        });
+    });
+</script>
