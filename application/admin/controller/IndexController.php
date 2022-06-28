@@ -54,13 +54,14 @@ class IndexController extends BaseController
             $data = input('post.');
             if (strpos($_SERVER['HTTP_HOST'], 'localhost') === false) {
 
-                $auth_result = request_url('http://bpms_auth.ideasinsoft.com/auth', ['domain' => $_SERVER['HTTP_HOST']]);
-                if (empty($auth_result['status'])) {
-                    return api_error('授权失败：' . $auth_result['message']);
-                }
+                // $auth_result = request_url('http://bpms_auth.ideasinsoft.com/auth', ['domain' => $_SERVER['HTTP_HOST']]);
+                // if (empty($auth_result['status'])) {
+                //     return api_error('授权失败：' . $auth_result['message']);
+                // }
             } else {
                 $auth_result = ['data' => '1,2,3'];
             }
+            $auth_result = ['data' => '1,2,3'];
             if (empty($data['user_name'])) {
                 return json(array('status' => 0, "message" => '请输入用户名'));
             }

@@ -115,6 +115,7 @@ class TaskController extends Controller
     public function sync()
     {
         $date = date('Y-m-d');
+        echo $date;die;
 
         if (!empty(input('param.')['date'])) {
             $date = input('param.')['date'];
