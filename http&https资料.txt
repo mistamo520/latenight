@@ -1,0 +1,3 @@
+User-Agent：请求载体的身份标识（当前系统版本，浏览器版本等）
+Connection：请求完毕后，是断开还是保持连接（close ,keep-alive）
+Content-Type：服务器响应客户端的数据类型
